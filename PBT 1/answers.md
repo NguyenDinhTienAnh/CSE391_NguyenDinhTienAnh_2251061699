@@ -85,3 +85,17 @@ Lỗi 7: Dòng 15 & Dòng 22 — Lỗi Semantic: Bỏ qua cấp độ tiêu đ�
 Lỗi 8: Dòng 16 — Thuộc tính `src` thiếu dấu ngoặc kép và thẻ `<img>` thiếu thuộc tính `alt` (bắt buộc trong HTML5) — Sửa thành `<img src="iphone.jpg" alt="iPhone 16 Pro">`.
 Lỗi 9: Dòng 18 — Lỗi chéo thẻ (Nesting error): Thẻ `<b>` mở bên trong `<p>` nhưng lại đóng bên ngoài `<p>` — Sửa trật tự đóng thẻ thành `<p>Giá: <strong>25.990.000đ</strong></p>`.
 Lỗi 10: Dòng 41 — Thiếu thẻ đóng của đoạn văn bản — Thêm `</p>` vào cuối câu.
+## Câu B4: shopee.vn
+1. 3 thẻ semantic HTML5 mà trang sử dụng đúng:
+
+<header>: Phần header trên cùng (logo, thanh tìm kiếm, giỏ hàng, tài khoản).
+<section>: Các khối nội dung nhóm theo chủ đề (Flash Sale, Sản phẩm hot, Gợi ý cho bạn…).
+<footer>: Phần chân trang (thông tin công ty, hỗ trợ, chính sách).
+
+2. *Table hiển thị nội dung đăng nhập tài khoản bao gồm banner bên trái và hộp đăng nhập bên trái gồm tên đăng nhập và mật khẩu 
+*Table này không dùng <thead> và <tbody>
+
+3. *Thẻ form này không khai báo thuộc tính action và method
+* thẻ input types được dùng 
+<input type="text">
+<input type="text">
