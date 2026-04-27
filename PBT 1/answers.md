@@ -75,3 +75,13 @@ Sau khi đọc chương 4, em thấy trang web trên bị Google đánh giá SEO
 
 # Phần B
 ## Câu B3: Debug
+Lỗi 1: Dòng 1 — Khai báo DOCTYPE sai cú pháp — Sửa `<!DOCTYPE>` thành `<!DOCTYPE html>`.
+Lỗi 2: Dòng 2 — Thiếu thẻ đóng của tiêu đề trang — Thêm `</title>` vào cuối dòng.
+Lỗi 3: Dòng 3 — Giá trị charset viết sai chuẩn — Sửa `utf8` thành `UTF-8` (hoặc `utf-8`).
+Lỗi 4: Dòng 4 — Thẻ đóng của tiêu đề H1 bị sai cú pháp (thiếu dấu `/`) — Sửa `<h1>` ở cuối thành `</h1>`.
+Lỗi 5: Dòng 4 & Dòng 6 — Lỗi Semantic: Tiêu đề chính `<h1>` đang nằm ngoài phần `<header>` — Di chuyển thẻ `<h1>` vào bên trong thẻ `<header>`.
+Lỗi 6: Dòng 8 — Thẻ đóng của link bị sai cú pháp — Sửa `<a>` ở cuối thành `</a>`.
+Lỗi 7: Dòng 15 & Dòng 22 — Lỗi Semantic: Bỏ qua cấp độ tiêu đề (nhảy cóc từ H1 xuống thẳng H3) — Sửa các thẻ `<h3>` thành `<h2>`.
+Lỗi 8: Dòng 16 — Thuộc tính `src` thiếu dấu ngoặc kép và thẻ `<img>` thiếu thuộc tính `alt` (bắt buộc trong HTML5) — Sửa thành `<img src="iphone.jpg" alt="iPhone 16 Pro">`.
+Lỗi 9: Dòng 18 — Lỗi chéo thẻ (Nesting error): Thẻ `<b>` mở bên trong `<p>` nhưng lại đóng bên ngoài `<p>` — Sửa trật tự đóng thẻ thành `<p>Giá: <strong>25.990.000đ</strong></p>`.
+Lỗi 10: Dòng 41 — Thiếu thẻ đóng của đoạn văn bản — Thêm `</p>` vào cuối câu.
