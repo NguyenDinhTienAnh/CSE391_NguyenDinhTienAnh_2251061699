@@ -73,3 +73,5 @@ Sau khi đọc chương 4, em thấy trang web trên bị Google đánh giá SEO
 
 *(Nguồn: tuan_1_html5, chương 5, phần bảng dữ liệu)*
 
+# Phần B
+## Câu B3: Debug
