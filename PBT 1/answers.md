@@ -72,3 +72,4 @@ Sau khi đọc chương 4, em thấy trang web trên bị Google đánh giá SEO
 3.  **Hiệu suất:** Tốc độ render của trình duyệt chậm hơn so với sử dụng CSS hiện đại (Flexbox/Grid).
 
 *(Nguồn: tuan_1_html5, chương 5, phần bảng dữ liệu)*
+
