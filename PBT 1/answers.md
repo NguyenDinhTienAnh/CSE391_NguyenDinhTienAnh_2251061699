@@ -73,51 +73,38 @@ Sau khi đọc chương 4, em thấy trang web trên bị Google đánh giá SEO
 
 *(Nguồn: tuan_1_html5, chương 5, phần bảng dữ liệu)*
 
-Phần B
-Câu B3: Debug HTML
-Lỗi 1: Dòng 1 — Khai báo DOCTYPE sai cú pháp — Sửa <!DOCTYPE> thành <!DOCTYPE html>.
+## Phần B
 
-Lỗi 2: Dòng 2 — Thiếu thẻ đóng của tiêu đề trang — Thêm </title> vào cuối dòng.
+### Câu B3: Debug HTML
 
-Lỗi 3: Dòng 3 — Giá trị charset viết sai chuẩn — Sửa utf8 thành UTF-8 (hoặc utf-8).
+* **Lỗi 1 (Dòng 1):** Khai báo DOCTYPE sai cú pháp — Sửa `<!DOCTYPE>` thành `<!DOCTYPE html>`.
+* **Lỗi 2 (Dòng 2):** Thiếu thẻ đóng của tiêu đề trang — Thêm `</title>` vào cuối dòng.
+* **Lỗi 3 (Dòng 3):** Giá trị charset viết sai chuẩn — Sửa `utf8` thành `UTF-8` (hoặc `utf-8`).
+* **Lỗi 4 (Dòng 4):** Thẻ đóng của tiêu đề H1 bị sai cú pháp (thiếu dấu `/`) — Sửa `<h1>` ở cuối thành `</h1>`.
+* **Lỗi 5 (Dòng 4 & Dòng 6):** Lỗi Semantic: Tiêu đề chính `<h1>` đang nằm ngoài phần `<header>` — Di chuyển thẻ `<h1>` vào bên trong thẻ `<header>`.
+* **Lỗi 6 (Dòng 8):** Thẻ đóng của link bị sai cú pháp — Sửa `<a>` ở cuối thành `</a>`.
+* **Lỗi 7 (Dòng 15 & Dòng 22):** Lỗi Semantic: Bỏ qua cấp độ tiêu đề (nhảy cóc từ H1 xuống thẳng H3) — Sửa các thẻ `<h3>` thành `<h2>`.
+* **Lỗi 8 (Dòng 16):** Thuộc tính `src` thiếu dấu ngoặc kép và thẻ `<img>` thiếu thuộc tính `alt` (bắt buộc trong HTML5) — Sửa thành `<img src="iphone.jpg" alt="iPhone 16 Pro">`.
+* **Lỗi 9 (Dòng 18):** Lỗi chéo thẻ (Nesting error): Thẻ `<b>` mở bên trong `<p>` nhưng lại đóng bên ngoài `<p>` — Sửa trật tự đóng thẻ thành `<p>Giá: <strong>25.990.000đ</strong></p>`.
+* **Lỗi 10 (Dòng 41):** Thiếu thẻ đóng của đoạn văn bản — Thêm `</p>` vào cuối câu.
 
-Lỗi 4: Dòng 4 — Thẻ đóng của tiêu đề H1 bị sai cú pháp (thiếu dấu /) — Sửa <h1> ở cuối thành </h1>.
+---
 
-Lỗi 5: Dòng 4 & Dòng 6 — Lỗi Semantic: Tiêu đề chính <h1> đang nằm ngoài phần <header> — Di chuyển thẻ <h1> vào bên trong thẻ <header>.
+### Câu B4: Phân tích trang shopee.vn
 
-Lỗi 6: Dòng 8 — Thẻ đóng của link bị sai cú pháp — Sửa <a> ở cuối thành </a>.
+#### 1. 3 thẻ semantic HTML5 mà trang sử dụng đúng:
+* `<header>`: Phần header trên cùng chứa logo, thanh tìm kiếm, giỏ hàng.
+* `<section>`: Dùng để nhóm các khối nội dung theo chủ đề (Ví dụ: khối Flash Sale, khối Sản phẩm hot, Gợi ý hôm nay…).
+* `<footer>`: Phần chân trang nằm dưới cùng chứa thông tin công ty, hỗ trợ khách hàng, chính sách.
 
-Lỗi 7: Dòng 15 & Dòng 22 — Lỗi Semantic: Bỏ qua cấp độ tiêu đề (nhảy cóc từ H1 xuống thẳng H3) — Sửa các thẻ <h3> thành <h2>.
+#### 2. Phân tích thẻ `<table>` trên trang:
+* **Vị trí tìm thấy:** Nằm trong phần "Mô tả sản phẩm" của một trang chi tiết áo thun/giày dép.
+* **Nội dung hiển thị:** Table này hiển thị bảng quy đổi kích cỡ (Size chart) để khách hàng chọn size áo/quần phù hợp.
+* **Cấu trúc:** Table này thường bị thiếu thẻ ngữ nghĩa, người bán có dùng `<tbody>` nhưng lại KHÔNG dùng `<thead>`. Các hàng tiêu đề chỉ dùng thẻ `<tr>` và `<td>` (thay vì `<th>`) nằm chung trong phần thân bảng.
 
-Lỗi 8: Dòng 16 — Thuộc tính src thiếu dấu ngoặc kép và thẻ <img> thiếu thuộc tính alt (bắt buộc trong HTML5) — Sửa thành <img src="iphone.jpg" alt="iPhone 16 Pro">.
-
-Lỗi 9: Dòng 18 — Lỗi chéo thẻ (Nesting error): Thẻ <b> mở bên trong <p> nhưng lại đóng bên ngoài <p> — Sửa trật tự đóng thẻ thành <p>Giá: <strong>25.990.000đ</strong></p>.
-
-Lỗi 10: Dòng 41 — Thiếu thẻ đóng của đoạn văn bản — Thêm </p> vào cuối câu.
-
-Câu B4: Phân tích trang shopee.vn
-1. 3 thẻ semantic HTML5 mà trang sử dụng đúng:
-
-<header>: Phần header trên cùng chứa logo, thanh tìm kiếm, giỏ hàng.
-
-<section>: Dùng để nhóm các khối nội dung theo chủ đề (Ví dụ: khối Flash Sale, khối Sản phẩm hot, Gợi ý hôm nay…).
-
-<footer>: Phần chân trang nằm dưới cùng chứa thông tin công ty, hỗ trợ khách hàng, chính sách.
-
-2. Phân tích thẻ <table> trên trang:
-
-Vị trí tìm thấy: Nằm trong phần "Mô tả sản phẩm" của một trang chi tiết áo thun/giày dép.
-
-Nội dung hiển thị: Table này hiển thị bảng quy đổi kích cỡ (Size chart) để khách hàng chọn size áo/quần phù hợp.
-
-Cấu trúc: Table này thường bị thiếu thẻ ngữ nghĩa, người bán có dùng <tbody> nhưng lại KHÔNG dùng <thead>. Các hàng tiêu đề chỉ dùng thẻ <tr> và <td> (thay vì <th>) nằm chung trong phần thân bảng.
-
-3. Phân tích thẻ <form> trên trang:
-
-Vị trí tìm thấy: Form đăng nhập hệ thống của Shopee.
-
-Action và Method: Thẻ form này không khai báo trực tiếp thuộc tính action và method trên HTML. Vì Shopee là dạng trang web Single Page Application, dữ liệu form được chặn lại và gửi đi ngầm thông qua JavaScript (gọi API).
-
-Input types được sử dụng: * <input type="text">: Dành cho ô nhập Tên đăng nhập / Email / Số điện thoại.
-
-<input type="password">: Dành cho ô nhập Mật khẩu để bảo mật ký tự.
+#### 3. Phân tích thẻ `<form>` trên trang:
+* **Vị trí tìm thấy:** Form đăng nhập hệ thống của Shopee.
+* **Action và Method:** Thẻ form này không khai báo trực tiếp thuộc tính `action` và `method` trên HTML. Vì Shopee là dạng trang web Single Page Application, dữ liệu form được chặn lại và gửi đi ngầm thông qua JavaScript (gọi API).
+* **Input types được sử dụng:**
+    * `<input type="text">`: Dành cho ô nhập Tên đăng nhập / Email / Số điện thoại.
+    * `<input type="password">`: Dành cho ô nhập Mật khẩu để bảo mật ký tự.
