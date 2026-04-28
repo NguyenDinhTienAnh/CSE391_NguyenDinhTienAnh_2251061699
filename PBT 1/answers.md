@@ -108,3 +108,118 @@ Sau khi đọc chương 4, em thấy trang web trên bị Google đánh giá SEO
 * **Input types được sử dụng:**
     * `<input type="text">`: Dành cho ô nhập Tên đăng nhập / Email / Số điện thoại.
     * `<input type="password">`: Dành cho ô nhập Mật khẩu để bảo mật ký tự.
+
+## Phần C
+
+### Câu C1
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết sản phẩm</title>
+</head>
+<body>
+  <header>
+    <h1>Logo Brand</h1>
+    <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+            </ul>
+        </nav>
+  </header>
+
+   <main>
+    <nav aria-label="breadcrumb">
+        <ol>
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/mobile">Điện thoại</a></li>
+            <li aria-current="page">iPhone 16</li>
+        </ol>
+    </nav>
+
+    <article itemscope itemtype="[https://schema.org/Product](https://schema.org/Product)">
+        <section id="product-overview">
+            <figure>
+                <div class="main-image">
+                    <img src="iphone16-main.jpg" alt="iPhone 16 màu hồng">
+                </div>
+                <ul class="thumbnail-list">
+                    <li><img src="thumb1.jpg" alt="Cạnh bên iPhone 16"></li>
+                    <li><img src="thumb2.jpg" alt="Mặt sau iPhone 16"></li>
+                    <li><img src="thumb3.jpg" alt="Cổng sạc iPhone 16"></li>
+                    <li><img src="thumb4.jpg" alt="Màn hình iPhone 16"></li>
+                    <li><img src="thumb5.jpg" alt="Hộp đựng iPhone 16"></li>
+                </ul>
+            </figure>
+
+            <div class="product-info">
+                <h1 itemprop="name">iPhone 16 - 128GB - Chính hãng VN/A</h1>
+                
+                <p class="price">
+                    Giá: <span>22.990.000đ</span>
+                </p>
+
+                <div class="rating">
+                    <span>4.5/5 sao</span>
+                </div>
+
+                <section class="description">
+                    <h2>Mô tả sản phẩm</h2>
+                    <p>iPhone 16 với chip A18 mạnh mẽ, camera cải tiến...</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="specifications">
+            <h2>Thông số kỹ thuật</h2>
+            <table>
+                <thead> <tr>
+                      <th>Màn hình</th>
+                      <th>Chipset</th>
+                  </tr>
+                </thead>
+                <tbody> <tr>
+                    <td>6.1 inch, Super Retina XDR</td>
+                    <td>Apple A18</td>
+                  </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reviews">
+            <h2>Đánh giá từ khách hàng</h2>
+            <article class="comment">
+                <footer>Nguyễn Văn A - <time datetime="2024-10-20">20/10/2024</time></footer>
+                <p>Máy rất đẹp, giao hàng nhanh!</p>
+            </article>
+        </section>
+    </article>
+
+    <aside>
+        <h3>Sản phẩm tương tự</h3>
+        <ul>
+            <li><a href="#">iPhone 16 Pro</a></li>
+            <li><a href="#">iPhone 15</a></li>
+        </ul>
+    </aside>
+  </main>
+
+  <footer>
+      <p>&copy; 2024 Ecommerce Store</p>
+  </footer>
+</body>
+</html>
+
+### Câu C2
+
+Tôi thấy quan điểm “cứ dùng `<div>` cho mọi thứ rồi thêm class” nghe có vẻ tiện nhưng mà nếu ta dùng lâu dài thì nó sẽ gây hại nhiều hơn là lợi.
+
+* **Về SEO:** Các công cụ tìm kếm như là Bing, Google không chỉ đọc class, mà còn dựa vào cấu trúc semantic để hiểu nội dung trang. Việc dùng `<header>`, `<main>`, `<article>`, `<section>`, `<nav>` giúp bot xác định đâu là nội dung chính, đâu là điều hướng, đâu là bài viết độc lập. Nếu mọi thứ đều là `<div>`, cấu trúc tài liệu trở nên “phẳng”, khó phân tích ngữ nghĩa và có thể ảnh hưởng đến thứ hạng tìm kiếm.
+* **Về Accessibility:** rình đọc màn hình (screen reader) cho người khiếm thị dựa vào thẻ semantic để điều hướng nhanh. Ví dụ, người dùng có thể nhảy trực tiếp tới `<nav>` hoặc `<main>` mà không phải nghe toàn bộ trang. Nếu chỉ dùng `<div>`, bạn phải bổ sung rất nhiều ARIA role, vừa phức tạp vừa dễ sai sót.
+* **Ví dụ cụ thể:** một trang blog dùng `<article>` cho từng bài viết và `<aside>` cho phần bài liên quan.
+
+Tuy nhiên, `<div>` vẫn hoàn toàn phù hợp khi chỉ cần một container thuần túy để layout hoặc styling, ví dụ bọc một nhóm phần tử để áp dụng flexbox hoặc grid mà không mang ý nghĩa nội dung riêng.
