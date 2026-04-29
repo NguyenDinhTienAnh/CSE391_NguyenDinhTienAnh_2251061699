@@ -36,7 +36,7 @@
 Sử dụng cặp thẻ `<fieldset>` và `<legend>` khi cần gom nhóm các input có liên quan chặt chẽ với nhau về mặt ngữ nghĩa thành một khối thống nhất.
 
 **Ví dụ:**
-```html
+```html 
 <fieldset>
     <legend>Chọn phương thức thanh toán:</legend>
 
@@ -45,7 +45,8 @@ Sử dụng cặp thẻ `<fieldset>` và `<legend>` khi cần gom nhóm các inp
 
     <input type="radio" id="credit" name="payment" value="credit">
     <label for="credit">Thẻ tín dụng/Ghi nợ</label>
-</fieldset>
+</fieldset> 
+```
 * **Trải nghiệm Screen Reader:** Khi người dùng chọn "COD", nó sẽ đọc: *"Chọn phương thức thanh toán: Thanh toán khi nhận hàng (COD), radio button"*. Nếu không có `<fieldset>`/`<legend>`, nó chỉ đọc: *"Thanh toán khi nhận hàng"*, khiến người dùng có thể quên mất ngữ cảnh của lựa chọn này.
 
 #### 3. `aria-label` dùng khi nào? Tại sao KHÔNG nên dùng khi đã có `<label>`?
@@ -98,4 +99,5 @@ Viết `alt` tốt cho 3 trường hợp:
 #### Ví dụ cụ thể
 * Thẻ sản phẩm (Product Card) trên trang E-Commerce.
 * Ảnh minh họa hoặc biểu đồ trong bài viết Blog/Tin tức.
+
 
