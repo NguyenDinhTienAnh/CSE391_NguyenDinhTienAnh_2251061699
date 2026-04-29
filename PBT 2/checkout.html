@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Trang thanh toán an toàn và xác nhận đơn hàng" />
+    <title>Xác nhận thanh toán | TechGear</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>TechGear Store</h1>
+        <nav class="site-nav" aria-label="Menu chính">
+          <ul>
+            <li><a href="/home">Trang chủ</a></li>
+            <li><a href="/shop">Cửa hàng</a></li>
+            <li><a href="/cart">Giỏ hàng (3)</a></li>
+            <li><span style="color: #555;">Thanh toán</span></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <div class="page-title">
+          <h2>Hoàn tất đơn hàng của bạn</h2>
+          <p>Vui lòng kiểm tra lại thông tin trước khi xác nhận.</p>
+        </div>
+
+        <form action="/process-checkout" method="POST" id="checkoutForm">
+          
+          <section class="block-section" id="cart-details">
+            <h3>1. Chi tiết sản phẩm</h3>
+            
+            <div class="form-row">
+              <label for="findItem">Thêm nhanh sản phẩm:</label>
+              <input type="search" id="findItem" name="findItem" list="gadgets" placeholder="Gõ tên thiết bị..." />
+              <datalist id="gadgets">
+                <option value="iPhone 16 Pro Max 256GB"></option>
+                <option value="AirPods Pro Gen 3"></option>
+                <option value="Apple Watch Ultra 2"></option>
+              </datalist>
+            </div>
+
+            <table>
+              <caption>Danh sách thiết bị đã chọn</caption>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tên thiết bị</th>
+                  <th>Giá bán</th>
+                  <th>SL</th>
+                  <th>Tổng con</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>iPhone 16 Pro Max 256GB</td>
+                  <td>25.990.000đ</td>
+                  <td>1</td>
+                  <td>25.990.000đ</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Apple Watch Ultra 2</td>
+                  <td>19.990.000đ</td>
+                  <td>1</td>
+                  <td>19.990.000đ</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="text-align: right;">Tổng thanh toán:</td>
+                  <td style="font-size: 1.2rem;">45.980.000đ</td>
+                </tr>
+              </tfoot>
+            </table>
+          </section>
+
+          <section class="block-section" id="shipping-info">
+            <h3>2. Thông tin nhận hàng</h3>
+
+            <div class="form-row">
+              <label for="customerName">Họ và tên người nhận <span style="color:red">*</span></label>
+              <input type="text" id="customerName" name="customerName" required placeholder="Nhập họ tên đầy đủ" />
+            </div>
+
+            <div class="form-row">
+              <label for="contactPhone">Số điện thoại liên hệ <span style="color:red">*</span></label>
+              <input type="tel" id="contactPhone" name="contactPhone" pattern="[0-9]{10}" required placeholder="VD: 0912345678" />
+            </div>
+
+            <div class="form-row">
+              <label for="fullAddress">Địa chỉ nhận hàng cụ thể <span style="color:red">*</span></label>
+              <textarea id="fullAddress" name="fullAddress" rows="3" required placeholder="Số nhà, tên đường, phường/xã, quận/huyện..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <label for="shipDate">Ngày nhận hàng mong muốn <span style="color:red">*</span></label>
+              <input type="date" id="shipDate" name="shipDate" min="2026-04-30" required />
+            </div>
+
+            <div class="form-row">
+              <label for="shipTime">Khung giờ giao hàng</label>
+              <select id="shipTime" name="shipTime">
+                <option value="morning">Sáng (8h00 - 12h00)</option>
+                <option value="afternoon">Chiều (14h00 - 18h00)</option>
+                <option value="night">Tối (18h00 - 21h00)</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="flexDays">Sẵn sàng chờ tối đa (ngày):</label>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>1</span>
+                <input type="range" id="flexDays" name="flexDays" min="1" max="7" step="1" value="3" style="flex-grow: 1;" />
+                <span>7</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="block-section" id="payment-methods">
+            <h3>3. Phương thức thanh toán</h3>
+
+            <fieldset style="border: 1px solid #ccc; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+              <legend style="font-weight: bold;">Chọn hình thức:</legend>
+              <div class="radio-options">
+                <div>
+                  <input type="radio" id="payCOD" name="payType" value="cod" required />
+                  <label for="payCOD">Tiền mặt (COD)</label>
+                </div>
+                <div>
+                  <input type="radio" id="payBank" name="payType" value="bank" />
+                  <label for="payBank">Chuyển khoản</label>
+                </div>
+                <div>
+                  <input type="radio" id="payWallet" name="payType" value="wallet" />
+                  <label for="payWallet">Ví điện tử</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-row">
+              <label for="promoCode">Mã khuyến mãi (Nếu có)</label>
+              <input type="text" id="promoCode" name="promoCode" pattern="^SALE[0-9]{4}$" placeholder="Định dạng: SALE + 4 số (VD: SALE2026)" title="Mã phải bắt đầu bằng chữ SALE và 4 chữ số theo sau" />
+            </div>
+          </section>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-submit" aria-label="Xác nhận đặt hàng">
+              ĐẶT HÀNG NGAY
+            </button>
+          </div>
+
+        </form>
+      </main>
+
+      <footer style="text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 0.9rem;">
+        <p>&copy; 2026 TienAnh Store.</p>
+      </footer>
+    </div>
+  </body>
+</html>
