@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký Tài khoản</title>
+</head>
+<body>
+
+    <form action="#" method="POST">
+        <h2>Đăng ký thành viên</h2>
+        
+        </form>
+
+</body>
+</html>
+<fieldset>
+            <legend>Thông tin cá nhân</legend>
+            
+            <div>
+                <label for="fullname">Họ tên:</label>
+                <input type="text" id="fullname" name="fullname" required minlength="2" maxlength="50">
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="phone">Số điện thoại:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+            </div>
+
+            <div>
+                <label for="dob">Ngày sinh:</label>
+                <input type="date" id="dob" name="dob" max="2026-04-29">
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Tài khoản</legend>
+
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" pattern="[a-zA-Z0-9_]{3,20}">
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" minlength="8" pattern="(?=.*\d)(?=.*[A-Z]).{8,}">
+            </div>
+
+            <div>
+                <label for="confirm_password">Xác nhận password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" minlength="8" pattern="(?=.*\d)(?=.*[A-Z]).{8,}">
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+
+            <div>
+                <label>Giới tính:</label>
+                <input type="radio" id="male" name="gender" value="male"> <label for="male">Nam</label>
+                <input type="radio" id="female" name="gender" value="female"> <label for="female">Nữ</label>
+            </div>
+
+            <div>
+                <label for="city">Thành phố:</label>
+                <select id="city" name="city">
+                    <option value="" disabled selected>-- Chọn Thành phố --</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="address">Địa chỉ chi tiết:</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+        </fieldset>
+        <div>
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">Tôi đồng ý với điều khoản sử dụng</label>
+        </div>
+
+        <div>
+            <button type="submit">Đăng ký tài khoản</button>
+            <button type="reset">Làm mới form</button>
+        </div>
