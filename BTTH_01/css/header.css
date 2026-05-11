@@ -1,0 +1,112 @@
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--bg-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.menu-toggle,
+.menu-icon {
+    display: none;
+}
+
+.navbar {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+    .header { padding: 15px 20px; }
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        padding: 10px 0;
+        z-index: 1001;
+    }
+    .navicon {
+        background: var(--text-dark);
+        display: block;
+        height: 3px;
+        width: 25px;
+        position: relative;
+        transition: background .2s ease-out;
+    }
+    .navicon::before, .navicon::after {
+        background: var(--text-dark);
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+    }
+    .navicon::before { top: -8px; }
+    .navicon::after { top: 8px; }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-white);
+        flex-direction: column;
+        gap: 0;
+        max-height: 0; 
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .navbar a {
+        display: block;
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid #f1f1f1;
+    }
+    .navbar a::after { display: none; }
+    .menu-toggle:checked ~ .navbar { max-height: 300px; }
+    .menu-toggle:checked ~ .menu-icon .navicon { background: transparent; }
+    .menu-toggle:checked ~ .menu-icon .navicon::before { transform: rotate(-45deg); top: 0; }
+    .menu-toggle:checked ~ .menu-icon .navicon::after { transform: rotate(45deg); top: 0; }
+}
