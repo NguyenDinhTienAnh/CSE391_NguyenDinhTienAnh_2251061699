@@ -33,3 +33,11 @@
     border-radius: 10px;
     transition: width 1s ease-out;
 }
+@media (max-width: 768px) {
+    .skills-section { padding: 60px 0; }
+    .skills-section h2 { font-size: 2rem; margin-bottom: 2rem; }
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

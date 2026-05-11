@@ -32,3 +32,16 @@
     line-height: 1.6;
     color: var(--text-light);
 }
+@media (max-width: 768px) {
+    .about-section { padding: 60px 0; }
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    .about-image img {
+        width: 200px;
+        height: 200px;
+    }
+    .about-content h2 { font-size: 2rem; }
+}
