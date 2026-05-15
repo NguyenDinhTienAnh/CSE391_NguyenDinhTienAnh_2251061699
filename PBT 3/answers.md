@@ -173,3 +173,25 @@ Inline style có độ ưu tiên cao nhất (vượt specificity thường).
 
 ⇒ **Màu: black** (do Rule A có `!important`)
 
+Phần B
+Bài B1: Liệt kê Selector
+Universal Selector: * (Dùng cho box-sizing)
+
+Element Selector: body, a, th, td (Tác động trực tiếp vào thẻ HTML)
+
+ID Selector: #main-header (Định dạng duy nhất cho header)
+
+Class Selector: .navbar, .skill-table, .active (Định dạng theo nhóm đối tượng)
+
+Descendant Selector (Thẻ con): .navbar a (Chỉ những thẻ a nằm trong .navbar)
+
+Pseudo-class: :hover, :nth-child(even) (Xử lý trạng thái và vị trí)
+
+Bài B2: kết quả
+Hộp 1 (content-box): Chiều rộng thực tế = 350px.
+
+Cách tính: 300px (width) + 20px (left padding) + 20px (right padding) + 5px (left border) + 5px (right border) = 350px.
+
+Hộp 2 (border-box): Chiều rộng thực tế = 300px.
+
+Cách tính: 300px đã bao gồm cả padding và border bên trong. Phần nội dung (content) sẽ bị thu hẹp lại còn 250px.
