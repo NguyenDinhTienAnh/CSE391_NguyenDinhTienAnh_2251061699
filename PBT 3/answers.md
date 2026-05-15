@@ -221,3 +221,60 @@ Bảng dưới đây liệt kê thứ tự ưu tiên của các Selector từ th
 | 10 | `body #demo.text.highlight` | `1, 2, 1` | **Darkblue** |
 
 ---
+## Phần C
+
+### Câu C1
+
+#### 1. Phân tích lỗi (Tính toán chiều rộng thực tế)
+Trong CSS mặc định (`box-sizing: content-box`), chiều rộng thực tế của một phần tử được tính theo công thức:
+
+> **Total Width = Width + Left Padding + Right Padding + Left Border + Right Border**
+
+#### 2. Giải thích tại sao layout bị vỡ
+Tổng chiều rộng thực tế của Sidebar và Content là **1064px**, trong khi đó Container bao ngoài chỉ rộng **960px**. Vì không đủ chỗ chứa trên một hàng, trình duyệt buộc phải đẩy phần tử xuất hiện sau (Content) xuống dòng mới.
+
+#### 3. Giải pháp khắc phục
+* **Cách 1: Sử dụng `box-sizing: border-box` (Khuyên dùng)**
+  Cách này giúp trình duyệt tự động tính toán lại phần nội dung (content) sao cho tổng kích thước không vượt quá `width` đã khai báo. Tuy nhiên, vì tổng 300 + 660 = 960, nhưng chúng ta lại có thêm Border, nên ta cần điều chỉnh nhẹ thông số.
+* **Cách 2: Không dùng `border-box`**
+  (Tính toán và trừ kích thước thủ công của Padding và Border vào Width ban đầu).
+
+#### 4. Tổng kết
+* **Chiều rộng thực tế Sidebar:** 342px.
+* **Chiều rộng thực tế Content:** 722px.
+* **Nguyên nhân:** Tổng chiều rộng thực tế (1064px) > Chiều rộng Container (960px).
+* **Giải pháp:** Đã triển khai 2 cách (Border-box và Trừ kích thước thủ công) trong file `debug_layout.css`.
+
+### Câu C2
+#### 1. Phân tích kết quả (Dự đoán)
+
+* **A. "Sản phẩm A" (`h2`)**
+  * **Font-size:** `20px`
+    * *Giải thích:* Selector `.card .title` nhắm trực tiếp vào thẻ `h2` này và thiết lập kích thước `20px`. Mặc dù thẻ cha `.container` có `14px`, nhưng quy tắc trực tiếp luôn thắng quy tắc kế thừa.
+  * **Color:** `Green`
+    * *Giải thích:* Ở đây có sự tranh chấp giữa `#featured .title` (màu đỏ) và `.highlight`. Tuy nhiên, lớp `.highlight` sử dụng từ khóa `!important`. Trong CSS Cascade, `!important` là "vũ khí" mạnh nhất, phá vỡ mọi quy tắc về độ ưu tiên (Specificity) thông thường.
+
+* **B. "Mô tả sản phẩm" (`p` trong card featured)**
+  * **Color:** `Blue`
+    * *Giải thích:* Thẻ `p` này có thuộc tính `color: inherit`. Điều này bắt buộc nó phải lấy màu từ thẻ cha trực tiếp của nó là `.card`. Thẻ `.card` được quy định màu xanh (blue). Do đó, thẻ `p` kế thừa màu xanh này.
+
+* **C. "Sản phẩm B" (`h2`)**
+  * **Font-size:** `20px`
+    * *Giải thích:* Tương tự sản phẩm A, nó khớp với selector `.card .title`.
+  * **Color:** `Blue`
+    * *Giải thích:* Thẻ `h2` này có class `.title`. Trong file CSS, không có selector nào khác quy định màu cho `.title` ngoại trừ các trường hợp đặc biệt (như `#featured` hoặc `.highlight` mà thẻ này không có). Vì `color` là một thuộc tính có tính kế thừa, nó sẽ lấy màu từ thẻ cha `.card` là màu xanh.
+
+* **D. "Mô tả sản phẩm B" (`p.highlight`)**
+  * **Color:** `Green`
+    * *Giải thích:* Mặc dù thẻ `p` nói chung trong card có lệnh `color: inherit` (để lấy màu xanh từ `.card`), nhưng class `.highlight` được gắn trực tiếp trên thẻ `p` này và có `!important`. Một lần nữa, `!important` ghi đè hoàn toàn giá trị kế thừa.
+
+#### 2. Tổng kết bảng kết quả
+
+| Phần tử | Thuộc tính | Kết quả | Lý do chính |
+| :--- | :--- | :--- | :--- |
+| **Sản phẩm A** | `font-size` | `20px` | `.card .title` thắng inheritance. |
+| **Sản phẩm A** | `color` | `Green` | `.highlight` có `!important`. |
+| **Mô tả SP A** | `color` | `Blue` | `inherit` từ `.card`. |
+| **Sản phẩm B** | `font-size` | `20px` | Khớp `.card .title`. |
+| **Sản phẩm B** | `color` | `Blue` | Kế thừa từ `.card`. |
+| **Mô tả SP B** | `color` | `Green` | `.highlight` có `!important`. |

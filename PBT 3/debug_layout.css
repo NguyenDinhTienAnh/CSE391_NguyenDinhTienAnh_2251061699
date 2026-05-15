@@ -1,0 +1,34 @@
+.container {
+    width: 960px;
+    margin: 20px auto;
+    border: 2px dashed red; 
+    overflow: hidden; 
+}
+
+.sidebar {
+    background: #e3f2fd;
+    float: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.content {
+    background: #f1f8e9;
+    float: left;
+    padding: 30px;
+    border: 1px solid #ccc;
+}
+
+.fix-1 .sidebar, .fix-1 .content {
+    box-sizing: border-box;
+}
+.fix-1 .sidebar { width: 300px; }
+.fix-1 .content { width: 660px; }
+
+
+.fix-2 .sidebar {
+    width: 258px; 
+}
+.fix-2 .content {
+    width: 598px; 
+}
