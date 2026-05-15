@@ -1,0 +1,30 @@
+/* 1. Universal Selector (0,0,0) */
+* { color: gray; }
+
+/* 2. Element Selector (0,0,1) */
+p { color: silver; }
+
+/* 3. Class Selector (0,1,0) */
+.text { color: blue; }
+
+/* 4. Hai Class Selector kết hợp (0,2,0) */
+.text.highlight { color: green; }
+
+/* 5. Pseudo-class kết hợp Class (0,2,0) - Lưu ý: bằng điểm quy tắc trên */
+p.text:not(.none) { color: purple; }
+
+/* 6. ID Selector (1,0,0) */
+#demo { color: orange; }
+
+/* 7. ID + Element Selector (1,0,1) */
+p#demo { color: brown; }
+
+/* 8. ID + Class Selector (1,1,0) */
+#demo.text { color: red; }
+
+/* 9. ID + 2 Classes (1,2,0) */
+#demo.text.highlight { color: teal; }
+
+/* 10. Inline Style (Khai báo trực tiếp trong HTML - 1,0,0,0) 
+   Hoặc dùng !important để "vô địch" (Tuy nhiên nên dùng Selector để đúng yêu cầu bài học) */
+body #demo.text.highlight { color: darkblue; } /* (1,2,1) */

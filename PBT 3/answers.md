@@ -173,25 +173,51 @@ Inline style có độ ưu tiên cao nhất (vượt specificity thường).
 
 ⇒ **Màu: black** (do Rule A có `!important`)
 
-Phần B
-Bài B1: Liệt kê Selector
-Universal Selector: * (Dùng cho box-sizing)
+# Phần B
 
-Element Selector: body, a, th, td (Tác động trực tiếp vào thẻ HTML)
+## Bài B1: Liệt kê Selector
+Dưới đây là các Selector được sử dụng trong bài tập để quản lý giao diện:
 
-ID Selector: #main-header (Định dạng duy nhất cho header)
+- **Universal Selector (`*`):** Thiết lập `box-sizing: border-box` cho toàn bộ trang.
+- **Element Selector:** `body`, `a`, `th`, `td` (Tác động trực tiếp vào cấu trúc thẻ).
+- **ID Selector:** `#main-header` (Định dạng duy nhất cho vùng đầu trang).
+- **Class Selector:** `.navbar`, `.skill-table`, `.active` (Sử dụng cho các nhóm đối tượng lặp lại).
+- **Descendant Selector:** `.navbar a` (Chỉ áp dụng cho các liên kết bên trong thanh điều hướng).
+- **Pseudo-class:** `:hover` (Trạng thái di chuột), `:nth-child(even)` (Định dạng dòng chẵn/lẻ).
 
-Class Selector: .navbar, .skill-table, .active (Định dạng theo nhóm đối tượng)
+---
 
-Descendant Selector (Thẻ con): .navbar a (Chỉ những thẻ a nằm trong .navbar)
+## Bài B2: Kết quả thực nghiệm Box Model
 
-Pseudo-class: :hover, :nth-child(even) (Xử lý trạng thái và vị trí)
+| Đặc điểm | Hộp 1 (`content-box`) | Hộp 2 (`border-box`) |
+| :--- | :--- | :--- |
+| **Width thiết lập** | 300px | 300px |
+| **Chiều rộng thực tế** | **350px** | **300px** |
+| **Cách tính** | `300 + 20(pad) + 20(pad) + 5(border) + 5(border)` | Đã bao gồm Padding và Border bên trong |
 
-Bài B2: kết quả
-Hộp 1 (content-box): Chiều rộng thực tế = 350px.
 
-Cách tính: 300px (width) + 20px (left padding) + 20px (right padding) + 5px (left border) + 5px (right border) = 350px.
 
-Hộp 2 (border-box): Chiều rộng thực tế = 300px.
+**Giải thích sự khác biệt:**
+- Với `content-box`, thuộc tính `width` chỉ tính cho phần nội dung. Padding và Border sẽ đẩy kích thước hộp to ra thêm.
+- Với `border-box`, thuộc tính `width` là kích thước tổng thể cuối cùng. Nội dung bên trong sẽ tự động co lại để nhường chỗ cho Padding và Border.
 
-Cách tính: 300px đã bao gồm cả padding và border bên trong. Phần nội dung (content) sẽ bị thu hẹp lại còn 250px.
+---
+
+## Bài B3: Bảng tính Độ ưu tiên (Specificity Score)
+
+Bảng dưới đây liệt kê thứ tự ưu tiên của các Selector từ thấp đến cao (thang đo: ID, Class, Element).
+
+| STT | Selector | Specificity Score | Màu sắc dự kiến |
+| :-- | :--- | :--- | :--- |
+| 1 | `*` | `0, 0, 0` | Gray |
+| 2 | `p` | `0, 0, 1` | Silver |
+| 3 | `.text` | `0, 1, 0` | Blue |
+| 4 | `.text.highlight` | `0, 2, 0` | Green |
+| 5 | `p.text:not(.none)` | `0, 2, 1` | Purple |
+| 6 | `#demo` | `1, 0, 0` | Orange |
+| 7 | `p#demo` | `1, 0, 1` | Brown |
+| 8 | `#demo.text` | `1, 1, 0` | Red |
+| 9 | `#demo.text.highlight` | `1, 2, 0` | Teal |
+| 10 | `body #demo.text.highlight` | `1, 2, 1` | **Darkblue** |
+
+---
