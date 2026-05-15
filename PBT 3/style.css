@@ -1,0 +1,84 @@
+* { 
+    box-sizing: border-box; 
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+#main-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+
+.navbar {
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #2a5298;       
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ff5722;        
+    text-decoration: underline; 
+}
+
+.navbar a.active {
+    background-color: #2a5298;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.skill-table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 20px;
+}
+
+.skill-table th, .skill-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Header row */
+.skill-table thead tr {
+    background-color: #1e3c72; 
+    color: white;             
+}
+
+/* Zebra striping */
+.skill-table tbody tr:nth-child(even) {
+    background-color: #e9ecef; /
+}
+
+/* Hover row */
+.skill-table tbody tr:hover {
+    background-color: #d1ecf1; 
+    cursor: pointer;
+}
+
+.site-footer {
+    background-color: #222;    
+    color: #bbb;              
+    text-align: center;        
+    padding: 20px 0;
+    margin-top: 40px;
+}
