@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài B1 - Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+<body>
+
+
+    <header class="fixed-header">
+        <div class="logo">MyLogo</div>
+        <nav class="navigation">
+            <a href="#">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <div class="layout-container">
+        <!-- Sticky Sidebar -->
+        <aside class="sticky-sidebar">
+            <h3>Danh mục</h3>
+            <ul>
+                <li>Điện thoại</li>
+                <li>Laptop</li>
+                <li>Phụ kiện</li>
+            </ul>
+            <p>(Thử cuộn trang xuống để thấy sidebar dính lại ở vị trí cách top 80px)</p>
+        </aside>
+
+        
+        <main class="main-content">
+            <h2>Sản phẩm nổi bật</h2>
+            
+           
+            <div class="product-card">
+                <span class="badge">HOT</span>
+                <div class="product-image">Ảnh sản phẩm</div>
+                <h3>Sản phẩm Demo</h3>
+                <p>Mô tả ngắn về sản phẩm để kiểm tra hiển thị của card.</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+
+           
+            <div class="dummy-content">
+                <p>Cuộn xuống tiếp để kiểm tra hành vi của Header, Sidebar và Nút Scroll To Top...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+                <p>Nội dung giả định...</p>
+            </div>
+        </main>
+    </div>
+
+
+    <a href="#" class="scroll-top" title="Lên đầu trang">↑</a>
+
+</body>
+</html>
