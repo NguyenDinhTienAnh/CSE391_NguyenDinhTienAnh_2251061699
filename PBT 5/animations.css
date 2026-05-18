@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+h2 {
+    color: #555;
+    margin-top: 2rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd; 
+    border-top: 5px solid #00bcd4; 
+    border-radius: 50%;
+   
+    animation: spin 1s linear infinite; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.card {
+    background: #fff;
+    width: 300px;
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+
+    transition: all 0.3s ease; 
+}
+
+
+.card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); 
+}
+
+.img-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden; 
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease; 
+}
+
+
+.card:hover .img-container img {
+    transform: scale(1.1);
+}
+
+
+.card-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-content h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.card-content .price {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+}
+
+
+.buy-btn {
+    background-color: #f1f1f1; 
+    color: #333;              
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    transition: all 0.3s ease; 
+}
+
+
+.buy-btn:hover {
+    background-color: #00bcd4; 
+    color: #fff;            
+    transform: scale(1.05);    
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-scroll {
+    
+    opacity: 0;
+    
+    
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+}
+
+
+@supports not (animation-timeline: view()) {
+    .fade-in-scroll {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+}
