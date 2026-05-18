@@ -202,3 +202,17 @@ Tính năng này cho phép một selector chia sẻ toàn bộ các thuộc tín
 * **Cài đặt trình biên dịch:** Sử dụng các công cụ như Sass (Node.js), các phần mềm như Prepros, hoặc tiện ích mở rộng (Extension) trên VS Code như *Live Sass Compiler*.
 * **Quá trình biên dịch:** Trình biên dịch sẽ đọc file `.scss`, xử lý các biến, mixins, lồng nhau... và tự động xuất ra một file `.css` thuần túy.
 * **Nhúng vào HTML:** Bạn sẽ nhúng file `.css` (kết quả sau khi biên dịch) vào thẻ `<link>` của file HTML, chứ KHÔNG nhúng file `.scss`.
+
+## Phần B - THỰC HÀNH CODE
+# Bài B3
+
+## Lệnh biên dịch SCSS sang CSS
+
+Để biên dịch thư mục `scss/` thành file CSS sử dụng thư viện `sass` (Dart Sass), hãy mở Terminal/Command Prompt tại thư mục gốc của project và chạy lệnh sau:
+
+```bash
+# Biên dịch 1 lần:
+sass scss/style.scss style.css
+
+# Hoặc chế độ tự động theo dõi thay đổi (--watch):
+sass --watch scss/style.scss:style.css

@@ -1,0 +1,17 @@
+// Import các partials (không cần đuôi .scss)
+@import 'variables';
+@import 'mixins';
+@import 'components';
+
+// Reset & Base Style cơ bản
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-primary;
+    background-color: $bg-color;
+    color: $text-dark;
+}
