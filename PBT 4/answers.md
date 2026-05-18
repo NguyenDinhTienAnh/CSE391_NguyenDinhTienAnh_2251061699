@@ -82,6 +82,7 @@
     padding: 10px; 
     margin-top: auto;
 }
+```
 
 #### 2. Lỗi: Item vẫn dính góc trái trên (Dù đã muốn căn giữa tuyệt đối)
 * **Nguyên nhân:** Khai báo `display: flex;` chỉ kích hoạt môi trường Flexbox. Khai báo `text-align: center;` ở phần tử con chỉ có tác dụng căn giữa phần văn bản bên trong khối con đó. Để căn giữa cả một khối flex item so với flex container cha, bạn phải dùng các thuộc tính căn gióng của chính Flexbox trên thẻ cha.
@@ -98,6 +99,7 @@
 .hero-content {
     text-align: center;
 }
+```
 
 #### 3. Lỗi: Sidebar bị co lại khi content quá dài
 * **Nguyên nhân:** Thuộc tính ngầm định của mọi flex item là `flex-shrink: 1` (cho phép co lại khi không gian container không đủ). Khi nội dung của `.content` quá dài hoặc có những phần tử không thể bẻ dòng (như ảnh lớn, link dài), nó sẽ ép vùng không gian của `.layout`, khiến trình duyệt bóp nghẹt chiều rộng `250px` của `.sidebar` để nhường chỗ.
@@ -117,3 +119,4 @@
     flex: 1; 
     min-width: 0; 
 }
+```
