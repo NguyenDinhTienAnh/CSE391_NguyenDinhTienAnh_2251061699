@@ -216,3 +216,167 @@ sass scss/style.scss style.css
 
 # Hoặc chế độ tự động theo dõi thay đổi (--watch):
 sass --watch scss/style.scss:style.css
+```
+## Phần C - SUY LUẬN
+
+### Bài C1: Phân tích Responsive Website (Shopee.vn)
+
+#### 1. Phân tích giao diện trên 3 kích thước màn hình
+
+**A. Giao diện Mobile (375px)**
+* **Navigation (Điều hướng):** Menu ngang trên cùng biến mất. Thay vào đó, thanh điều hướng chuyển thành một thanh tìm kiếm thu gọn ghim ở đầu trang (Sticky Header) cùng biểu tượng giỏ hàng/chat. Ngoài ra, xuất hiện một thanh Bottom Navigation Bar (chứa các tab: Trang chủ, Mall, Video, Thông báo, Tôi) ở dưới cùng màn hình để dễ dàng thao tác bằng ngón tay cái.
+* **Lưới Content (Grid):** Khu vực "Gợi ý hôm nay" (Product Grid) bị thu hẹp chỉ còn 2 cột thẻ sản phẩm.
+* **Elements bị ẩn:** Các banner quảng cáo dọc hai bên, danh sách menu phụ ở top-bar (Kênh Người Bán, Tải ứng dụng, Kết nối) và toàn bộ cấu trúc Footer chi tiết đều bị ẩn đi hoặc chuyển thành dạng accordion thu gọn.
+* **Font size:** Kích thước chữ được tăng tương đối so với tỷ lệ màn hình và các khoảng cách (padding/margin) được nới lỏng để chống chạm nhầm (touch-friendly).
+
+**B. Giao diện Tablet (768px)**
+* **Navigation:** Thanh tìm kiếm được mở rộng hơn. Không có Bottom Navigation như trên điện thoại, nhưng các menu phụ vẫn được giữ ở mức tối giản.
+* **Lưới Content (Grid):** Lưới sản phẩm thường hiển thị 4 cột. Các danh mục sản phẩm (Categories) hiển thị dưới dạng thanh trượt ngang (horizontal scroll) thay vì hiển thị toàn bộ.
+* **Elements bị ẩn:** Banner hai bên trang vẫn bị ẩn để nhường không gian tối đa cho hiển thị sản phẩm ở giữa.
+
+**C. Giao diện Desktop (1440px)**
+* **Navigation:** Header hiển thị đầy đủ (Full Header). Phía trên cùng có thanh Top-bar chứa các liên kết tiện ích. Thanh tìm kiếm cực lớn nằm giữa, kèm theo các từ khóa gợi ý phổ biến ngay bên dưới.
+* **Lưới Content (Grid):** Hiển thị tối đa không gian với 6 cột thẻ sản phẩm cho phần "Gợi ý hôm nay". Khối "Danh mục" hiển thị đầy đủ thành một mạng lưới chi tiết không cần cuộn ngang.
+* **Elements bị ẩn:** Không có phần tử nào bị ẩn. Giao diện hiển thị toàn bộ nội dung từ Banner lớn, Flash Sale, cho đến Footer đầy đủ nhiều cột thông tin.
+* **Font size:** Cỡ chữ tiêu chuẩn, mật độ thông tin dày đặc hơn do có lợi thế về không gian hiển thị hoặc thao tác bằng chuột chính xác.
+
+---
+
+### Bài C2
+
+#### 1. Wireframe & Chiến lược bố cục (Layout Strategy)
+
+**A. Mobile (< 768px)**
+* **Bố cục tổng thể:** 1 cột duy nhất (Single column), cuộn dọc từ trên xuống dưới.
+* **Header:** Logo và số điện thoại nằm trên cùng 1 hàng (chia hai bên) hoặc xếp chồng lên nhau.
+* **Hero Image:** Trải toàn bộ chiều ngang (`100vw`), chiều cao vừa phải (ví dụ `30vh`) để người dùng thấy ngay nội dung bên dưới.
+* **Grid ảnh món ăn:** Xếp thành 2 cột (3 hàng) để tiết kiệm chiều dài trang, hoặc 1 cột nếu ảnh cần chi tiết cao.
+* **Form đặt bàn:** Nằm ngay dưới khu vực ảnh món ăn. Các trường nhập liệu (input) xếp dọc 100% chiều ngang để dễ chạm/gõ phím trên điện thoại.
+* **Bản đồ (Map):** Nằm dưới cùng, ngay trên Footer.
+* **Những gì bị ẩn trên Mobile?** Các yếu tố trang trí rườm rà trên Hero image, hoặc có thể ẩn bớt text mô tả chi tiết của món ăn trong Grid (chỉ giữ lại ảnh và tên món) để tối ưu không gian hiển thị.
+
+**B. Tablet (768px - 1023px)**
+* **Bố cục tổng thể:** Kết hợp 1 cột và 2 cột.
+* **Header & Hero:** Hiển thị rộng rãi hơn, Hero image cao hơn (khoảng `40-50vh`).
+* **Grid ảnh món ăn:** Đổi thành 3 cột (2 hàng).
+* **Bản đồ nằm đâu?** Tối ưu không gian bằng cách đặt Form đặt bàn và Bản đồ nằm ngang hàng nhau (Side-by-side) chia tỷ lệ 50-50 (1 hàng 2 cột). Form bên trái, bản đồ bên phải.
+* **Footer:** Dàn ngang các thông tin thay vì xếp chồng.
+
+**C. Desktop (≥ 1024px)**
+* **Bố cục tổng thể:** Layout 2 cột chính (Tỷ lệ 70% - 30% hoặc 60% - 40%). Cột lớn bên trái chứa nội dung chính, cột nhỏ bên phải làm Sidebar.
+* **Có Sidebar không?** CÓ.
+* **Vùng Main (Trái):** Chứa Grid ảnh món ăn (3 cột ảnh) và Form đặt bàn ngay bên dưới.
+* **Vùng Sidebar (Phải):** Chứa Bản đồ Google Maps ghim cố định (`position: sticky`) kèm theo số điện thoại hotline to, rõ ràng và giờ mở cửa.
+
+#### 2. CSS Skeleton (Grid + Mobile-First)
+
+```css
+.layout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.hero {
+    height: 30vh;
+    background-color: #ddd;
+}
+
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+.booking-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.sidebar-map {
+    width: 100%;
+    height: 250px;
+    background-color: #ccc; 
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        height: 40vh;
+    }
+
+    .main-content {
+        padding: 0 30px;
+    }
+
+    .food-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    .form-map-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: stretch;
+    }
+}
+
+@media (min-width: 1024px) {
+    .layout-wrapper {
+        max-width: 1200px;
+        margin: 0 auto; 
+    }
+
+    .hero {
+        height: 50vh;
+    }
+
+ 
+    .main-content {
+        grid-template-columns: 2fr 1fr; 
+        gap: 40px;
+    }
+
+
+    .content-left {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .sidebar-map {
+        height: auto;
+        min-height: 400px;
+        position: sticky; 
+        top: 20px;
+    }
+
+    
+    .form-map-wrapper {
+        display: block; 
+    }
+}
+```
+
