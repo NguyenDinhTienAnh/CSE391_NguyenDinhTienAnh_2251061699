@@ -1,0 +1,266 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    
+    font-size: 14px; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fcfcfc;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.header {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 1rem 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+
+.hamburger {
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.nav-menu {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #333;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #00bcd4;
+}
+
+
+#menu-toggle:checked ~ .nav-menu {
+    display: flex;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem 5%;
+    gap: 1.5rem;
+}
+.sidebar, .ads-bar {
+    display: none;
+}
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card img {
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.card .price {
+    font-weight: bold;
+    color: #d32f2f;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.card button {
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.card button:hover {
+    background-color: #008ba3;
+}
+
+
+.footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px; 
+    }
+
+    
+    .hamburger {
+        display: none; 
+    }
+
+    .header {
+        flex-wrap: nowrap;
+    }
+
+    .nav-menu {
+        display: flex;
+        width: auto;
+        flex-direction: row;
+        margin-top: 0;
+        gap: 1.5rem;
+    }
+
+    .nav-menu a {
+        padding: 0;
+        border-bottom: none;
+    }
+
+   
+    .sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+    }
+
+    .sidebar h3 {
+        margin-right: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .filter-options {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .filter-options select {
+        padding: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+  
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+@media (min-width: 1024px) {
+    html {
+        font-size: 18px; 
+    }
+
+    .main-wrapper {
+        flex-direction: row; 
+        align-items: flex-start;
+    }
+
+    
+    .sidebar {
+        display: block;
+        width: 250px;
+        flex-shrink: 0;
+    }
+
+    .sidebar h3 {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .filter-options {
+        flex-direction: column;
+    }
+
+    .filter-options select {
+        width: 100%;
+    }
+    .product-grid {
+        flex: 1; 
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .ads-bar {
+        display: block;
+        width: 200px;
+        flex-shrink: 0;
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+    }
+
+    .ad-banner {
+        background: #f1f1f1;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #555;
+    }
+}
