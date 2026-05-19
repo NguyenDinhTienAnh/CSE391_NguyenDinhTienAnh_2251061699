@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <aside class="col-md-3 col-lg-2 p-0 bg-dark text-white position-fixed vh-100 d-none d-md-block shadow">
+                <div class="p-3 border-bottom border-secondary d-flex align-items-center">
+                    <i class="bi bi-shop fs-4 me-2 text-warning"></i>
+                    <h5 class="mb-0 fw-bold">Admin Panel</h5>
+                </div>
+                
+                
+                <div class="list-group list-group-flush mt-3">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 active" aria-current="true">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0">
+                        <i class="bi bi-box-seam me-2"></i> Quản lý đơn hàng
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0">
+                        <i class="bi bi-people me-2"></i> Khách hàng
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0">
+                        <i class="bi bi-bar-chart me-2"></i> Báo cáo
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 mt-4">
+                        <i class="bi bi-gear me-2"></i> Cài đặt
+                    </a>
+                </div>
+            </aside>
+
+            
+            <main class="col-md-9 offset-md-3 col-lg-10 offset-lg-2 p-4">
+                
+                
+                <header class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white border border-secondary-subtle dropdown-toggle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://picsum.photos/seed/user/32/32" alt="User" class="rounded-circle me-1">
+                            Xin chào, Admin
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Tin nhắn</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </header>
+
+               
+                <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i> Cập nhật dữ liệu hệ thống thành công lúc 10:00 AM.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card text-white bg-primary h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="card-title text-uppercase mb-2 opacity-75">Doanh thu</h6>
+                                <h3 class="card-text fw-bold">125.500.000 ₫</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card text-white bg-success h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="card-title text-uppercase mb-2 opacity-75">Đơn hoàn thành</h6>
+                                <h3 class="card-text fw-bold">1,245</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card text-dark bg-warning h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="card-title text-uppercase mb-2 opacity-75">Chờ xử lý</h6>
+                                <h3 class="card-text fw-bold">48</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card text-white bg-danger h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="card-title text-uppercase mb-2 opacity-75">Đơn hủy/hoàn</h6>
+                                <h3 class="card-text fw-bold">12</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-8 col-xl-6">
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" placeholder="Tìm kiếm theo mã đơn, tên khách hàng...">
+                            <select class="form-select border-start" style="max-width: 150px;">
+                                <option selected>Tất cả trạng thái</option>
+                                <option value="1">Hoàn thành</option>
+                                <option value="2">Đang xử lý</option>
+                            </select>
+                            <button class="btn btn-dark" type="button">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0 fw-bold">Đơn hàng mới nhất</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover mb-0 align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Mã Đơn</th>
+                                                <th>Khách hàng</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Trạng thái</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">#ORD-001</td>
+                                                <td>Trần Văn A</td>
+                                                <td>19/05/2026</td>
+                                                <td>1.200.000 ₫</td>
+                                                <td><span class="badge bg-success">Hoàn thành</span></td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Chi tiết</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">#ORD-002</td>
+                                                <td>Nguyễn Thị B</td>
+                                                <td>19/05/2026</td>
+                                                <td>450.000 ₫</td>
+                                                <td><span class="badge bg-warning text-dark">Chờ xử lý</span></td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Chi tiết</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">#ORD-003</td>
+                                                <td>Lê Hoàng C</td>
+                                                <td>18/05/2026</td>
+                                                <td>3.500.000 ₫</td>
+                                                <td><span class="badge bg-danger">Đã hủy</span></td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Chi tiết</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    
+                <div class="row mb-5">
+                    <div class="col-12 col-xl-8">
+                        <h5 class="fw-bold mb-3">Hỗ trợ & Hướng dẫn (FAQ)</h5>
+                        <div class="accordion shadow-sm" id="faqAccordion">
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        Làm thế nào để xuất báo cáo doanh thu Excel?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-secondary">
+                                        Bạn có thể xuất báo cáo bằng cách truy cập mục <strong>Báo cáo</strong> ở menu bên trái, chọn khoảng thời gian cần xuất và nhấn nút <strong>"Xuất Excel"</strong> ở góc trên cùng bên phải.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        Quy trình hoàn tiền cho đơn hàng bị hủy như thế nào?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-secondary">
+                                        Khi một đơn hàng đã thanh toán bị hủy, hệ thống sẽ tự động ghi nhận vào mục <strong>Yêu cầu hoàn tiền</strong>. Quản trị viên cần vào mục này để duyệt lệnh chi hoàn cho khách hàng trong vòng 24h.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
