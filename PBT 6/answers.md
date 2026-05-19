@@ -75,3 +75,52 @@ Cả 3 class này đều dùng để bọc nội dung, nhưng cách chúng kiể
 | **`.container`** | Có chiều rộng tối đa cố định theo từng điểm dừng. | Căn giữa trên màn hình. Màn hình càng lớn, chiều rộng tối đa của nó sẽ giật cấp (nhảy số) theo từng breakpoint (`sm`, `md`, `lg`, `xl`, `xxl`), để lại khoảng trống ở hai bên lề. |
 | **`.container-fluid`** | Luôn rộng 100%. | Chiếm toàn bộ chiều rộng của màn hình (`width: 100%`) ở mọi kích thước thiết bị, từ điện thoại đến màn hình siêu rộng. |
 | **`.container-md`** | 100% khi nhỏ, giật cấp khi lớn. | Sẽ trải rộng 100% như `.container-fluid` ở các màn hình nhỏ hơn `md` (`< 768px`). Bắt đầu từ mức `md` (`≥ 768px`) trở lên, nó sẽ hoạt động giống hệt `.container` (có max-width cố định và căn giữa). |
+
+## Phần C
+### Câu C1: Tùy biến Bootstrap (10đ)
+
+#### 1. Quy trình đổi màu `$primary` sang `#E63946`
+Để thay đổi màu gốc của Bootstrap bằng SASS, bạn không can thiệp trực tiếp vào mã nguồn của Bootstrap tải về mà thiết lập một luồng biên dịch riêng.
+
+**Công cụ cần thiết:**
+* Node.js và NPM (Node Package Manager).
+* Trình biên dịch SASS (cài đặt qua npm: `npm install sass` hoặc dùng extension *Live Sass Compiler* trong VS Code).
+* Mã nguồn Bootstrap (cài qua npm: `npm install bootstrap`).
+
+**Quy trình và file cần modify:**
+Bạn tạo một file SASS của riêng mình (ví dụ: `custom.scss`). Trong file này, bạn sẽ ghi đè biến màu trước khi import thư viện Bootstrap.
+
+```scss
+$primary: #E63946;
+@import "../node_modules/bootstrap/scss/bootstrap";
+```
+#### 2. Tại sao KHÔNG nên override trực tiếp bằng CSS?
+Nếu bạn dùng CSS thuần: `.btn-primary { background: #E63946 !important; }`, đây là một thực hành rất xấu (bad practice) vì những lý do sau:
+
+* **Mất tính đồng bộ:** Màu `$primary` trong Bootstrap không chỉ dùng cho nút bấm mà còn dùng cho `.text-primary`, `.bg-primary`, `.border-primary`, `.alert-primary`, v.v. Nếu override bằng CSS, bạn sẽ phải tự viết code ghi đè cho tất cả các class này một cách thủ công.
+* **Mất hiệu ứng Hover / Active:** Khi dùng SASS variable, Bootstrap có các hàm (color functions) tự động tính toán ra màu nhạt hơn (hover) hoặc đậm hơn (active/focus) dựa trên màu `$primary` gốc. Nếu bạn viết CSS cứng, nút của bạn sẽ bị mất hiệu ứng hover, và bạn lại phải tự viết thêm `.btn-primary:hover`.
+
+---
+
+### Câu C2: So sánh CSS Thuần và Bootstrap (10đ)
+Dưới đây là bảng so sánh trải nghiệm phát triển một Navbar và Product Card sử dụng CSS thuần so với Bootstrap:
+
+| Tiêu chí | CSS Thuần (Raw CSS) | Bootstrap 5 |
+| :--- | :--- | :--- |
+| **Số dòng CSS cần viết** | **Rất nhiều** (Từ 100 - 300 dòng để xử lý Flexbox, Media Queries, Hover states, Animations). | **Gần như 0 dòng**. Chỉ sử dụng các utilities và components có sẵn trong HTML. |
+| **Thời gian phát triển** | **Lâu**. Phải xây dựng cấu trúc từ con số 0, liên tục test lại trên nhiều thiết bị (Mobile, Tablet, Desktop) để sửa lỗi giao diện. | **Rất nhanh**. Layout tự động responsive ngay khi gắn đúng class (như `navbar-expand-lg`, `col-md-6`). |
+| **Khả năng tùy biến** | **100% tự do**. Dễ dàng tạo ra các thiết kế độc bản, không bị gò bó bởi bất kỳ khuôn mẫu nào. | **Bị giới hạn** bởi Design System của Bootstrap. Muốn làm khác đi cần phải học cách ghi đè SASS hoặc viết code đắp lên, khá cồng kềnh. |
+
+#### Khi nào NÊN và KHÔNG NÊN dùng Bootstrap?
+
+**NÊN dùng Bootstrap khi:**
+* Cần xây dựng ứng dụng với tốc độ cực nhanh (Rapid Prototyping, MVP).
+* Làm các dự án nội bộ, Admin Dashboard, Back-office nơi tính năng quan trọng hơn một giao diện độc đáo.
+* Làm việc trong đội ngũ có kỹ năng CSS không quá mạnh nhưng cần ra mắt sản phẩm chuẩn Responsive, không bị lỗi hiển thị.
+* Ngân sách và thời gian dự án eo hẹp.
+
+**KHÔNG NÊN dùng Bootstrap khi:**
+* Sản phẩm yêu cầu một thiết kế UI/UX độc bản, mang đậm dấu ấn thương hiệu (như landing page của Apple, các website sáng tạo/nghệ thuật).
+* Giao diện có thiết kế vượt ra khỏi hệ thống lưới 12 cột tiêu chuẩn hoặc yêu cầu các layout bất đối xứng phức tạp.
+* Dự án đặt nặng vấn đề hiệu suất và dung lượng (Performance). Việc tải toàn bộ thư viện Bootstrap sẽ gây thừa thãi nếu bạn chỉ dùng 10-20% số class của nó (dù có thể tối ưu bằng `PurgeCSS` nhưng setup tốn thời gian).
+* Team frontend đã sử dụng thành thạo các công cụ hiện đại hơn và linh hoạt hơn như `Tailwind CSS`.
