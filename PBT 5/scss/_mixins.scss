@@ -1,0 +1,24 @@
+// Mixin 1: Quản lý Media Queries
+@mixin respond-to($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+// Mixin 2: Căn giữa nhanh với Flexbox
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Mixin 3: Tạo hiệu ứng shadow và hover cho thẻ Card
+@mixin card-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(-8px);
+    }
+}
