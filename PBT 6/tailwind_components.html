@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Component Library</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 p-6 md:p-12 font-sans">
+
+    <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="border-b pb-4">
+            <h1 class="text-4xl font-extrabold text-gray-900">UI Component Library</h1>
+            <p class="text-gray-500 mt-2">Được xây dựng hoàn toàn bằng Tailwind CSS Utility Classes.</p>
+        </div>
+
+        
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-700">1. Buttons & Sizes</h2>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm border space-y-8">
+                <!-- Variants -->
+                <div class="flex flex-wrap gap-4 items-center">
+                    <!-- Primary -->
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Primary
+                    </button>
+                    <!-- Secondary -->
+                    <button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                        Secondary
+                    </button>
+                    <!-- Outline -->
+                    <button class="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Outline
+                    </button>
+                    <!-- Disabled -->
+                    <button disabled class="bg-blue-600 text-white px-4 py-2 rounded-md font-medium opacity-50 cursor-not-allowed">
+                        Disabled
+                    </button>
+                    <!-- Loading -->
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                    </button>
+                </div>
+
+             
+                <div class="flex flex-wrap gap-4 items-end border-t pt-6">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 text-sm rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Small (sm)
+                    </button>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 text-base rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Medium (md)
+                    </button>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 text-lg rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Large (lg)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-700">2. Cards Layout</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+        
+                <div class="bg-white rounded-xl shadow-md border overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <img class="w-full h-48 object-cover" src="https://picsum.photos/seed/shoes/400/300" alt="Product">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-900">Sneaker X-Pro</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-4">Giày thể thao siêu nhẹ, thoáng khí.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-extrabold text-blue-600">1.200.000 ₫</span>
+                            <button class="bg-gray-900 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Mua ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="bg-white rounded-xl shadow-md border overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center p-6">
+                    <img class="w-24 h-24 rounded-full border-4 border-gray-100 object-cover shadow-sm mb-4" src="https://picsum.photos/seed/user/200/200" alt="Avatar">
+                    <h3 class="text-xl font-bold text-gray-900">Lê Hoàng Nam</h3>
+                    <p class="text-blue-600 font-medium text-sm mb-2">Senior UI/UX Designer</p>
+                    <p class="text-gray-500 text-sm mb-6">Đam mê sáng tạo những trải nghiệm người dùng tuyệt vời và giao diện tinh tế.</p>
+                    <div class="flex space-x-3 w-full">
+                        <button class="flex-1 bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Nhắn tin
+                        </button>
+                        <button class="flex-1 bg-blue-600 text-white hover:bg-blue-700 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Theo dõi
+                        </button>
+                    </div>
+                </div>
+
+               
+                <div class="bg-white rounded-xl shadow-md border-2 border-blue-500 relative overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col p-6">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">PHỔ BIẾN</div>
+                    <h3 class="text-lg font-bold text-gray-900">Gói Chuyên Nghiệp</h3>
+                    <div class="mt-4 mb-6">
+                        <span class="text-4xl font-extrabold text-gray-900">499k</span>
+                        <span class="text-gray-500">/tháng</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600 flex-1">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Không giới hạn dự án
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Hỗ trợ 24/7
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Báo cáo phân tích nâng cao
+                        </li>
+                    </ul>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-md font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Đăng ký ngay
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-700">3. Form Elements</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border max-w-2xl">
+                <form class="space-y-6">
+                    
+                
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Địa chỉ Email</label>
+                        <input type="email" id="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors" placeholder="you@example.com">
+                    </div>
+
+                    <div>
+                        <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Quốc gia</label>
+                        <select id="country" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors">
+                            <option>Việt Nam</option>
+                            <option>Nhật Bản</option>
+                            <option>Hàn Quốc</option>
+                        </select>
+                    </div>
+
+                  
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Tin nhắn của bạn</label>
+                        <textarea id="message" rows="4" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors" placeholder="Nhập nội dung..."></textarea>
+                    </div>
+
+                    
+                    <div>
+                        <span class="block text-sm font-medium text-gray-700 mb-2">Sở thích cá nhân</span>
+                        <div class="space-y-2">
+                            <label class="inline-flex items-center mr-6">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" checked>
+                                <span class="ml-2 text-sm text-gray-600">Đọc sách</span>
+                            </label>
+                            <label class="inline-flex items-center mr-6">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                <span class="ml-2 text-sm text-gray-600">Du lịch</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                <span class="ml-2 text-sm text-gray-600">Thể thao</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-700">4. Alerts (Notifications)</h2>
+            <div class="space-y-4 max-w-3xl">
+                
+              
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-md flex items-start justify-between">
+                    <div class="flex">
+                        <svg class="h-5 w-5 text-green-500 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h3 class="text-green-800 font-medium">Thành công!</h3>
+                            <p class="text-green-700 text-sm mt-1">Dữ liệu của bạn đã được lưu vào hệ thống an toàn.</p>
+                        </div>
+                    </div>
+                    <button class="text-green-500 hover:text-green-700 hover:bg-green-100 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+           
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-md flex items-start justify-between">
+                    <div class="flex">
+                        <svg class="h-5 w-5 text-red-500 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h3 class="text-red-800 font-medium">Đã có lỗi xảy ra!</h3>
+                            <p class="text-red-700 text-sm mt-1">Mật khẩu bạn nhập không đúng. Vui lòng thử lại.</p>
+                        </div>
+                    </div>
+                    <button class="text-red-500 hover:text-red-700 hover:bg-red-100 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+              
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-md flex items-start justify-between">
+                    <div class="flex">
+                        <svg class="h-5 w-5 text-yellow-500 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <div>
+                            <h3 class="text-yellow-800 font-medium">Cảnh báo!</h3>
+                            <p class="text-yellow-700 text-sm mt-1">Gói cước của bạn sẽ hết hạn trong 3 ngày tới.</p>
+                        </div>
+                    </div>
+                    <button class="text-yellow-500 hover:text-yellow-700 hover:bg-yellow-100 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-colors">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+               
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md flex items-start justify-between">
+                    <div class="flex">
+                        <svg class="h-5 w-5 text-blue-500 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h3 class="text-blue-800 font-medium">Thông tin mới</h3>
+                            <p class="text-blue-700 text-sm mt-1">Đã có bản cập nhật hệ thống phiên bản v2.0.4.</p>
+                        </div>
+                    </div>
+                    <button class="text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-700">5. Navigation</h2>
+            
+            <div class="space-y-8">
+                <!-- 5.1 Horizontal Navbar -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden border">
+                    <nav class="flex items-center justify-between px-6 py-4">
+                        <div class="flex items-center space-x-8">
+                            <a href="#" class="text-2xl font-bold text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Brand</a>
+                            <div class="hidden md:flex space-x-6">
+                                <a href="#" class="text-gray-900 font-medium hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded px-1">Dashboard</a>
+                                <a href="#" class="text-gray-500 font-medium hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded px-1">Team</a>
+                                <a href="#" class="text-gray-500 font-medium hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded px-1">Projects</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full p-1 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            </button>
+                            <img class="w-8 h-8 rounded-full border border-gray-300 hover:ring-2 hover:ring-indigo-500 cursor-pointer" src="https://picsum.photos/seed/nav/50/50" alt="User">
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- 5.2 Vertical Sidebar (Rendered inside a box for demonstration) -->
+                <div class="bg-gray-900 text-white w-64 rounded-lg shadow-xl overflow-hidden min-h-[400px] flex flex-col">
+                    <div class="px-6 py-5 border-b border-gray-800 flex items-center justify-between">
+                        <span class="text-xl font-bold tracking-wider">ADMIN</span>
+                    </div>
+                    
+                    <div class="flex-1 px-3 py-4 space-y-1">
+                        <!-- Active item -->
+                        <a href="#" class="bg-gray-800 text-white group flex items-center px-3 py-2.5 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            <svg class="text-gray-300 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            Trang chủ
+                        </a>
+                        
+                        <!-- Normal items -->
+                        <a href="#" class="text-gray-300 hover:bg-gray-800 hover:text-white group flex items-center px-3 py-2.5 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            Khách hàng
+                        </a>
+                        
+                        <a href="#" class="text-gray-300 hover:bg-gray-800 hover:text-white group flex items-center px-3 py-2.5 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                            Dự án
+                        </a>
+
+                        <a href="#" class="text-gray-300 hover:bg-gray-800 hover:text-white group flex items-center px-3 py-2.5 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Cài đặt
+                        </a>
+                    </div>
+                    
+                    <div class="px-3 py-4 border-t border-gray-800">
+                        <a href="#" class="text-gray-400 hover:text-white flex items-center px-3 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

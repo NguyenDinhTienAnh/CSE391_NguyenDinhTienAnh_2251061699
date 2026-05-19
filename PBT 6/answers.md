@@ -124,3 +124,78 @@ Dưới đây là bảng so sánh trải nghiệm phát triển một Navbar và
 * Giao diện có thiết kế vượt ra khỏi hệ thống lưới 12 cột tiêu chuẩn hoặc yêu cầu các layout bất đối xứng phức tạp.
 * Dự án đặt nặng vấn đề hiệu suất và dung lượng (Performance). Việc tải toàn bộ thư viện Bootstrap sẽ gây thừa thãi nếu bạn chỉ dùng 10-20% số class của nó (dù có thể tối ưu bằng `PurgeCSS` nhưng setup tốn thời gian).
 * Team frontend đã sử dụng thành thạo các công cụ hiện đại hơn và linh hoạt hơn như `Tailwind CSS`.
+
+# TRACK B — TAILWINDCSS
+## Phần A
+### Câu A1
+#### 1. Thẻ bao ngoài cùng (Container Wrapper)
+* **`flex`** → `display: flex;` 
+* **`items-center`** → `align-items: center;` 
+* **`justify-between`** → `justify-content: space-between;` 
+* **`p-4`** → `padding: 1rem;` 
+* **`bg-white`** → `background-color: #ffffff;` (Màu nền trắng)
+* **`shadow-md`** → `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);` 
+* **`rounded-lg`** → `border-radius: 0.5rem;` 
+* **`hover:shadow-xl`** → `&:hover { box-shadow: ... }` 
+* **`transition-shadow`** → `transition-property: box-shadow;` 
+* **`duration-300`** → `transition-duration: 300ms;` 
+
+#### 2. Thẻ hình ảnh (Avatar)
+* **`w-16`** → `width: 4rem;` 
+* **`h-16`** → `height: 4rem;` 
+* **`rounded-full`** → `border-radius: 9999px;` 
+* **`object-cover`** → `object-fit: cover;` 
+#### 3. Thẻ chứa nội dung chữ (Text Container)
+* **`ml-4`** → `margin-left: 1rem;`
+* **`flex-1`** → `flex: 1 1 0%;` 
+#### 4. Thẻ H3 (Tên người dùng)
+* **`text-lg`** → `font-size: 1.125rem; line-height: 1.75rem;` 
+* **`font-semibold`** → `font-weight: 600;` 
+* **`text-gray-800`** → `color: #1f2937;` 
+* **`truncate`** → `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;` 
+
+#### 5. Thẻ P (Nghề nghiệp)
+* **`text-sm`** → `font-size: 0.875rem; line-height: 1.25rem;` 
+* **`text-gray-500`** → `color: #6b7280;` 
+
+#### 6. Thẻ Button (Nút bấm)
+* **`px-4`** → `padding-left: 1rem; padding-right: 1rem;` 
+* **`py-2`** → `padding-top: 0.5rem; padding-bottom: 0.5rem;` 
+* **`bg-blue-500`** → `background-color: #3b82f6;` 
+* **`text-white`** → `color: #ffffff;` 
+* **`rounded-md`** → `border-radius: 0.375rem;` 
+* **`hover:bg-blue-600`** → `&:hover { background-color: #2563eb; }` 
+* **`focus:ring-2`** → `&:focus { box-shadow: ... }` 
+* **`focus:ring-blue-300`** → `&:focus { ... }` 
+
+### Câu A2
+#### 1. Giải thích Prefix Responsive (`md:`, `lg:`, `xl:`)
+Tailwind CSS sử dụng nguyên tắc **Mobile-First** (thiết kế cho thiết bị di động trước), giống như Bootstrap. Các class không có prefix sẽ được áp dụng mặc định cho màn hình nhỏ nhất. Khi thêm các prefix như `md:`, `lg:`, `xl:`, class đó sẽ chỉ bắt đầu có tác dụng khi kích thước màn hình đạt đến một điểm dừng (breakpoint) tương ứng và kéo dài trở lên.
+
+* **`md:` (Medium):** Áp dụng cho Tablet trở lên (mặc định `≥ 768px`).
+* **`lg:` (Large):** Áp dụng cho Desktop/Laptop trở lên (mặc định `≥ 1024px`).
+* **`xl:` (Extra Large):** Áp dụng cho màn hình Desktop lớn (mặc định `≥ 1280px`).
+
+**Ví dụ:** `md:grid-cols-2 lg:grid-cols-4` có nghĩa là:
+* **Dưới 768px (Mobile):** Không bị ảnh hưởng bởi 2 class trên (thường sẽ tự rơi về mặc định là 1 cột nếu có class `grid-cols-1` hoặc hiển thị xếp chồng).
+* **Từ 768px đến 1023px (Tablet - `md:`):** Giao diện chia thành lưới 2 cột.
+* **Từ 1024px trở lên (Desktop - `lg:`):** Giao diện chia thành lưới 4 cột.
+#### 2. Giải thích State Modifiers (`hover:`, `focus:`, `active:`, `group-hover:`)
+Đây là các tiền tố (prefix) cho phép bạn áp dụng CSS class dựa trên các trạng thái (states) tương tác của phần tử.
+
+* **`hover:`** Tương đương với pseudo-class `:hover` trong CSS. Class đi kèm sẽ được kích hoạt khi người dùng di chuột (hover) lên trên phần tử.
+  * *VD:* `hover:bg-blue-500` (Nền đổi thành xanh dương khi di chuột vào).
+* **`focus:`** Tương đương với `:focus`. Kích hoạt khi phần tử được chọn/tập trung, thường dùng cho các ô `<input>`, `<textarea>` hoặc `<button>` khi người dùng click vào hoặc dùng phím Tab di chuyển tới.
+  * *VD:* `focus:outline-none focus:ring-2` (Bỏ viền mặc định và thêm vòng sáng khi click vào ô nhập liệu).
+* **`active:`** Tương đương với `:active`. Kích hoạt tại đúng thời điểm phần tử đang bị nhấn giữ (nhấp chuột xuống nhưng chưa nhả ra).
+  * *VD:* `active:scale-95` (Tạo hiệu ứng nút bấm bị lún xuống khi nhấn).
+* **`group-hover:`** Đây là một tính năng rất mạnh của Tailwind. Nó cho phép một phần tử con thay đổi style khi thẻ cha của nó (được gắn class `group`) bị hover. Thay vì phải viết CSS phức tạp, bạn chỉ cần gắn thẻ cha là `group` và thẻ con có class `group-hover:text-red-500`.
+
+#### 3. Viết class Tailwind tương đương `d-none d-md-flex` của Bootstrap
+**Yêu cầu:** *"Ẩn trên mobile, hiện dạng flex trên tablet trở lên"*.
+
+Dựa theo nguyên tắc Mobile-First, ta sẽ ẩn phần tử ở mức mặc định (mobile), sau đó ghi đè thành `display: flex` từ breakpoint `md:` trở đi. Mã class Tailwind chuẩn xác là:
+
+```html
+hidden md:flex
+```

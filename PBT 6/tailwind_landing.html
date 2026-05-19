@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind E-Commerce Landing Page</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100 font-sans">
+
+    
+    <nav class="bg-white sticky top-0 z-50 shadow-sm dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+              
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-400">TailShop</a>
+                </div>
+                
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">Trang chủ</a>
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">Sản phẩm</a>
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">Khuyến mãi</a>
+                </div>
+
+                
+                <div class="flex items-center space-x-4">
+                    
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        
+                        <svg class="w-5 h-5 text-gray-800 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                    
+                    <button class="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="relative bg-gray-900 h-[60vh] flex items-center justify-center">
+    
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover" src="https://picsum.photos/seed/hero/1920/1080" alt="Hero background">
+            <div class="absolute inset-0 bg-black bg-opacity-60 mix-blend-multiply"></div>
+        </div>
+        
+       
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 tracking-tight">
+                Tương Lai Của Mua Sắm
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Khám phá bộ sưu tập mới nhất với phong cách thiết kế tối giản, tinh tế và tối ưu cho mọi thiết bị của bạn.
+            </p>
+            <a href="#products" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition-transform transform hover:scale-105 shadow-lg">
+                Khám phá ngay
+            </a>
+        </div>
+    </div>
+
+
+    <main id="products" class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Sản Phẩm Nổi Bật</h2>
+            <div class="mt-2 w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+           
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                <div class="relative overflow-hidden">
+                    <img src="https://picsum.photos/seed/tw1/400/400" alt="Product" class="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                    <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">MỚI</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Tai nghe Bluetooth X</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Âm thanh sắc nét, chống ồn chủ động với pin lên tới 24 giờ liên tục.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-400">1.250.000đ</span>
+                        <button class="bg-gray-900 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-white px-3 py-1.5 rounded transition-colors text-sm font-medium">Thêm</button>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                <div class="relative overflow-hidden">
+                    <img src="https://picsum.photos/seed/tw2/400/400" alt="Product" class="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Bàn phím Cơ KeyChron</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Gõ êm ái, switch thay thế nóng, tương thích hoàn hảo Mac/Windows.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-400">2.100.000đ</span>
+                        <button class="bg-gray-900 dark:bg-gray-700 hover:bg-blue-600 text-white px-3 py-1.5 rounded transition-colors text-sm font-medium">Thêm</button>
+                    </div>
+                </div>
+            </div>
+
+         
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                <div class="relative overflow-hidden">
+                    <img src="https://picsum.photos/seed/tw3/400/400" alt="Product" class="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                    <span class="absolute top-3 right-3 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded">-20%</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Chuột Logitech MX</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Chuột công thái học cao cấp, cảm biến theo dõi trên mọi bề mặt.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-400">1.890.000đ</span>
+                        <button class="bg-gray-900 dark:bg-gray-700 hover:bg-blue-600 text-white px-3 py-1.5 rounded transition-colors text-sm font-medium">Thêm</button>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                <div class="relative overflow-hidden">
+                    <img src="https://picsum.photos/seed/tw4/400/400" alt="Product" class="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Màn hình UltraWide</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Không gian hiển thị rộng lớn, tối đa hóa hiệu suất làm việc.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-400">7.500.000đ</span>
+                        <button class="bg-gray-900 dark:bg-gray-700 hover:bg-blue-600 text-white px-3 py-1.5 rounded transition-colors text-sm font-medium">Thêm</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    
+    <footer class="bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">TailShop</h4>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Mua sắm dễ dàng, hiện đại và bảo mật cùng nền tảng bán lẻ thế hệ mới.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Danh mục</h4>
+                <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Thiết bị điện tử</a></li>
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Phụ kiện công nghệ</a></li>
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Laptop & PC</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Hỗ trợ</h4>
+                <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Hướng dẫn đổi trả</a></li>
+                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Liên hệ chúng tôi</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Đăng ký bản tin</h4>
+                <div class="flex flex-col space-y-2">
+                    <input type="email" placeholder="Email của bạn" class="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">Đăng ký</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-800 py-6 text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2026 TailShop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body>
+</html>
