@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Công Việc Cá Nhân</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Quản Lý Công Việc</h1>
+
+        <!-- Khu vực thông báo -->
+        <div id="notificationArea" class="notification hidden"></div>
+
+        <!-- Thống kê và Nút thêm -->
+        <section class="dashboard">
+            <div class="stats-box">
+                <div class="stat-item">Tổng cộng: <span id="totalTasks" class="badge">0</span></div>
+                <div class="stat-item">Đã hoàn thành: <span id="completedTasks" class="badge success">0</span></div>
+                <div class="stat-item">Chưa hoàn thành: <span id="pendingTasks" class="badge warning">0</span></div>
+            </div>
+            <button id="btnOpenForm" class="btn btn-primary">Thêm Công Việc</button>
+        </section>
+
+        <!-- Danh sách công việc (Dạng lưới Card) -->
+        <section id="taskList" class="task-grid">
+            <!-- Render dữ liệu bằng JS -->
+        </section>
+    </main>
+
+    <!-- Modal Form Thêm/Sửa -->
+    <div id="taskModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Thêm Công Việc Mới</h2>
+            <form id="taskForm">
+                <input type="hidden" id="editingIndex" value="-1">
+                
+                <div class="form-group">
+                    <label for="taskTitle">Tiêu đề:</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDesc">Mô tả ngắn:</label>
+                    <textarea id="taskDesc" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDeadline">Hạn hoàn thành:</label>
+                    <input type="date" id="taskDeadline" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskPriority">Mức ưu tiên:</label>
+                    <select id="taskPriority">
+                        <option value="Thấp">Thấp</option>
+                        <option value="Trung bình" selected>Trung bình</option>
+                        <option value="Cao">Cao</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Lưu công việc</button>
+                    <button type="button" id="btnCloseModal" class="btn btn-secondary">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
