@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài B3 - Mini Game Đoán Số</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .game-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .game-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn {
+            background-color: #667eea;
+            color: white;
+            width: 100%;
+        }
+        
+        .start-btn:hover {
+            background-color: #5568d3;
+        }
+        
+        .reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #da190b;
+        }
+        
+        .output {
+            background-color: #f9f9f9;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+            display: none;
+        }
+        
+        .output.show {
+            display: block;
+        }
+        
+        .output h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .hint {
+            font-size: 16px;
+            color: #ff9800;
+            margin: 10px 0;
+        }
+        
+        .correct {
+            color: #4caf50;
+        }
+        
+        .wrong {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Đoán Số (1-100)</h1>
+        
+        <div class="game-info">
+            <p>Máy đã chọn một số từ <strong>1 đến 100</strong></p>
+            <p>Bạn có <strong>7 lần đoán</strong> để tìm ra con số đó</p>
+        </div>
+        
+        <div class="button-group">
+            <button class="start-btn" onclick="startGame()">🎯 Bắt Đầu Game</button>
+        </div>
+        
+        <div id="game-output" class="output">
+            <h3>Trạng Thái Game</h3>
+            <div id="game-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let secretNumber;
+        let attempts = 0;
+        const maxAttempts = 7;
+        let guessedNumbers = [];
+        let gameRunning = false;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            guessedNumbers = [];
+            gameRunning = true;
+
+            document.getElementById('game-output').classList.add('show');
+            askForGuess();
+        }
+
+        function askForGuess() {
+            if (!gameRunning) return;
+
+            let userInput = prompt(
+                `Đoán lần ${attempts + 1}/${maxAttempts}:\nNhập số từ 1 đến 100:`
+            );
+
+            // Nếu user nhấn Cancel
+            if (userInput === null) {
+                updateOutput(`<p class="wrong">❌ Bạn đã hủy game!</p><p>Số đúng là: <strong>${secretNumber}</strong></p>`);
+                gameRunning = false;
+                return;
+            }
+
+            // Validate input
+            const number = parseInt(userInput);
+
+            if (isNaN(number) || number < 1 || number > 100) {
+                alert("❌ Vui lòng nhập một số từ 1 đến 100!");
+                askForGuess();
+                return;
+            }
+
+            // Kiểm tra số lặp
+            if (guessedNumbers.includes(number)) {
+                alert(`⚠️ Bạn đã đoán số ${number} rồi!\nHãy thử số khác.`);
+                askForGuess();
+                return;
+            }
+
+            attempts++;
+            guessedNumbers.push(number);
+
+            // So sánh
+            if (number === secretNumber) {
+                updateOutput(
+                    `<p class="correct">✅ ĐÚNG RỒI!</p>` +
+                    `<p class="message">Bạn đoán đúng sau <strong>${attempts}</strong> lần!</p>` +
+                    `<p>Các số bạn đã đoán: ${guessedNumbers.join(', ')}</p>`
+                );
+                gameRunning = false;
+            } else if (number < secretNumber) {
+                if (attempts >= maxAttempts) {
+                    updateOutput(
+                        `<p class="wrong">❌ THUA CUỘC!</p>` +
+                        `<p class="message">Số đúng là: <strong>${secretNumber}</strong></p>` +
+                        `<p>Các số bạn đã đoán: ${guessedNumbers.join(', ')}</p>` +
+                        `<p>Bạn đã hết ${maxAttempts} lần đoán.</p>`
+                    );
+                    gameRunning = false;
+                } else {
+                    alert(`⬆️ Số bạn đoán quá thấp!\nLần đoán còn lại: ${maxAttempts - attempts}`);
+                    askForGuess();
+                }
+            } else {
+                if (attempts >= maxAttempts) {
+                    updateOutput(
+                        `<p class="wrong">❌ THUA CUỘC!</p>` +
+                        `<p class="message">Số đúng là: <strong>${secretNumber}</strong></p>` +
+                        `<p>Các số bạn đã đoán: ${guessedNumbers.join(', ')}</p>` +
+                        `<p>Bạn đã hết ${maxAttempts} lần đoán.</p>`
+                    );
+                    gameRunning = false;
+                } else {
+                    alert(`⬇️ Số bạn đoán quá cao!\nLần đoán còn lại: ${maxAttempts - attempts}`);
+                    askForGuess();
+                }
+            }
+        }
+
+        function updateOutput(content) {
+            document.getElementById('game-content').innerHTML = content;
+        }
+    </script>
+</body>
+</html>
