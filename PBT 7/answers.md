@@ -194,3 +194,117 @@ var html = `
 ```
 
 
+## Phần C 
+
+### Câu C1
+
+#### Danh sách TẤT CẢ các lỗi tìm được:
+
+| # | Dòng | Lỗi | Giải thích | Cách sửa |
+|---|------|-----|-----------|----------|
+| 1 | 2 | Thiếu `;` | Return statement thiếu dấu chấm phẩy (mặc dù JS tự động thêm nhưng vẫn là lỗi về style) | Thêm `;` vào cuối dòng |
+| 2 | 5 | Thiếu `;` | Câu lệnh `var giamGia = ...` thiếu dấu chấm phẩy | Thêm `;` vào cuối dòng |
+| 3 | 8 | **Phép gán thay vì so sánh** ⭐ | `if (giaSauGiam = 0)` dùng `=` (gán) thay vì `===` (so sánh). Điều này sẽ gán 0 cho biến thay vì kiểm tra điều kiện | Sửa thành `if (giaSauGiam === 0)` |
+| 4 | 11 | Thiếu `;` | Return statement thiếu dấu chấm phẩy | Thêm `;` vào cuối dòng |
+| 5 | 15 | **Input kiểu String** ⭐ | `tinhGiaGiamGia("100000", 20)` truyền "100000" dạng string, dẫn đến phép toán `string * number` không chính xác | Sửa thành `tinhGiaGiamGia(100000, 20)` (số, không phải string) |
+| 6 | 15 | Không validate input | Không kiểm tra giaBan có phải là số dương hay không | Thêm điều kiện kiểm tra: `if (giaBan <= 0) return "Giá bán phải > 0"` |
+| 7 | 21 | **Lỗi Closure với `var`** ⭐ | Sử dụng `var i` trong vòng lặp với setTimeout gây ra closure issue: Khi callback của setTimeout chạy, giá trị `i` đã là 5 ở tất cả các callback | Sửa `var i` thành `let i` để tạo block scope riêng cho mỗi lần lặp |
+
+#### Code gốc (sai):
+```javascript
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ"    //  Lỗi 1: Thiếu ;
+    }
+    
+    var giamGia = giaBan * phanTramGiam / 100   //  Lỗi 2: Thiếu ;
+    let giaSauGiam = giaBan - giamGia
+    
+    if (giaSauGiam = 0) {                       //  Lỗi 3: = thay vì ===
+        console.log("Sản phẩm miễn phí!")
+    }
+    
+    return giaSauGiam                           //  Lỗi 4: Thiếu ;
+}
+
+// Test
+const gia = tinhGiaGiamGia("100000", 20)       //  Lỗi 5: String thay vì number
+console.log("Giá sau giảm: " + gia + "đ")
+
+const gia2 = tinhGiaGiamGia(50000, 110)
+console.log("Giá: " + gia2)
+
+for (var i = 0; i < 5; i++) {                  //  Lỗi 7: var gây closure issue
+    setTimeout(function() {
+        console.log("Item " + i)               // → In ra "Item 5" năm lần
+    }, 1000)
+}
+```
+
+#### Code sửa (đúng):
+```javascript
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    // Validate input
+    if (typeof giaBan !== 'number' || giaBan <= 0) {
+        return "Giá bán phải là số dương";      //  Lỗi 6: Validate
+    }
+    
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ";  //  Lỗi 1: Thêm ;
+    }
+    
+    const giamGia = giaBan * phanTramGiam / 100; // ✅ Lỗi 2: Thêm ; + dùng const
+    const giaSauGiam = giaBan - giamGia;
+     Lỗi 3: === thay vì =
+        console.log("Sản phẩm miễn phí!");
+    }
+    
+    return giaSauGiam;                         //  Lỗi 4: Thêm ;
+}
+
+// Test
+const gia = tinhGiaGiamGia(100000, 20);        //  Lỗi 5: Number, không String
+console.log("Giá sau giảm: " + gia + "đ");
+
+const gia2 = tinhGiaGiamGia(50000, 110);
+console.log("Giá: " + gia2);
+
+for (let i = 0; i < 5; i++) {                  //  Lỗi 7: let thay vì var
+    setTimeout(function() {
+        console.log("Item " + i);              // → In ra "Item 0", "Item 1", ..., "Item 4"
+    }, 1000);
+}
+```
+
+#### Giải thích chi tiết lỗi 7 (Closure với var vs let):
+
+**Tại sao `var` gây lỗi?**
+```javascript
+// Khi dùng var i
+for (var i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i);
+    }, 1000);
+}
+// → Output: Item 5, Item 5, Item 5, Item 5, Item 5
+// Vì var i được khai báo ở phạm vi FUNCTION, không phải block
+// Khi setTimeout chạy sau 1 giây, vòng lặp đã kết thúc với i = 5
+// Tất cả 5 callback đều tham chiếu đến cùng một biến i = 5
+```
+
+**Tại sao `let` hoạt động đúng?**
+```javascript
+// Khi dùng let i
+for (let i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i);
+    }, 1000);
+}
+// → Output: Item 0, Item 1, Item 2, Item 3, Item 4
+// Vì let i được khai báo ở phạm vi BLOCK (mỗi lần lặp có 1 block riêng)
+// JavaScript tự động tạo ra 5 closure riêng biệt, mỗi cái lưu giá trị i khác nhau
+// Callback thứ 1 sẽ dùng i từ lần lặp 1 (i=0)
+// Callback thứ 2 sẽ dùng i từ lần lặp 2 (i=1), v.v...
+```
+
+---
