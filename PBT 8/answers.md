@@ -499,3 +499,145 @@ console.log(product.specs.ram);  // 8 ✓
 | **Destructuring** |  Copy |  Reference | `{...obj, nested: {...obj.nested}}` | Verbose |
 | **JSON** |  Copy |  Copy | `JSON.parse(JSON.stringify(obj))` | Chậm, không copy functions |
 | **structuredClone()** |  Copy |  Copy | `structuredClone(obj)` | Modern, nhanh, hỗ trợ functions |
+
+---
+
+# PHẦN B — THỰC HÀNH CODE (60 điểm)
+
+## Bài B1 (20đ) — Quản lý Sản phẩm E-Commerce
+
+### File: product_manager.js
+
+**Các hàm được triển khai:**
+
+#### 1. getInStock(products) - `filter()`
+```javascript
+function getInStock(products) {
+    return products.filter(p => p.stock > 0);
+}
+```
+- Lọc sản phẩm có `stock > 0`
+- Output: 9 sản phẩm (loại iPad Air)
+
+#### 2. filterProducts(products, category, minPrice, maxPrice) - `filter()`
+```javascript
+function filterProducts(products, category, minPrice, maxPrice) {
+    return products.filter(p => 
+        p.category === category && 
+        p.price >= minPrice && 
+        p.price <= maxPrice
+    );
+}
+```
+- Filter kết hợp 3 điều kiện: category + min/max price
+- Output: [iPhone 16, Samsung S24, Pixel 9] cho phones 15-25 triệu
+
+#### 3. sortByPrice(products, order = "asc") - `sort()`
+```javascript
+function sortByPrice(products, order = "asc") {
+    return [...products].sort((a, b) => 
+        order === "asc" ? a.price - b.price : b.price - a.price
+    );
+}
+```
+- `[...products]` tạo shallow copy để không mutate gốc
+- Sắp xếp tăng (asc) hoặc giảm (desc)
+
+#### 4. cheapestByCategory(products) - `reduce()`
+```javascript
+function cheapestByCategory(products) {
+    return products.reduce((result, product) => {
+        const category = product.category;
+        if (!result[category] || product.price < result[category].price) {
+            result[category] = product;
+        }
+        return result;
+    }, {});
+}
+```
+- `reduce()` để group và tìm sản phẩm rẻ nhất mỗi category
+- Output: 
+  ```
+  {
+    phone: { id: 9, name: "Pixel 9", price: 19990000, ... },
+    laptop: { id: 10, name: "ThinkPad X1", price: 32990000, ... },
+    accessory: { id: 7, name: "Galaxy Buds", price: 3490000, ... },
+    tablet: { id: 8, name: "Xiaomi Pad 6", price: 7990000, ... }
+  }
+  ```
+
+#### 5. totalInventoryValue(products) - `reduce()`
+```javascript
+function totalInventoryValue(products) {
+    return products.reduce((total, p) => total + (p.price * p.stock), 0);
+}
+```
+- Tính tổng: Σ(price × stock) cho mỗi sản phẩm
+- Output: 1.266.930.000đ
+
+#### 6. formatProductList(products) - `map()`
+```javascript
+function formatProductList(products) {
+    return products.map(p => ({
+        name: p.name,
+        formattedPrice: p.price.toLocaleString('vi-VN') + "đ"
+    }));
+}
+```
+- Transform mỗi sản phẩm thành {name, formattedPrice}
+- `toLocaleString('vi-VN')` định dạng giá theo chuẩn Việt Nam
+- Output: [{ name: "iPhone 16", formattedPrice: "25.990.000đ" }, ...]
+
+#### 7. averageRating(products) - `reduce()`
+```javascript
+function averageRating(products) {
+    const sum = products.reduce((total, p) => total + p.rating, 0);
+    return (sum / products.length).toFixed(2);
+}
+```
+- `reduce()` tính tổng rating
+- Chia cho số lượng sản phẩm
+- `toFixed(2)` làm tròn 2 chữ số thập phân
+- Output: 4.43
+
+#### 8. searchProducts(products, keyword) - `filter()`
+```javascript
+function searchProducts(products, keyword) {
+    const lowerKeyword = keyword.toLowerCase();
+    return products.filter(p => p.name.toLowerCase().includes(lowerKeyword));
+}
+```
+- `toLowerCase()` đưa về chữ thường để so sánh case-insensitive
+- `includes()` kiểm tra xem name có chứa keyword không
+- Output: Tìm "iphone" → [iPhone 16], "pro" → [MacBook Pro, AirPods Pro]
+
+### Kết quả Test:
+
+```
+=== IN-STOCK PRODUCTS ===
+[9 products - loại iPad Air]
+
+=== PHONES 15-25 TRIỆU ===
+[iPhone 16, Samsung S24, Pixel 9]
+
+=== CHEAPEST BY CATEGORY ===
+{
+  phone: Pixel 9 (19.990.000đ),
+  laptop: ThinkPad X1 (32.990.000đ),
+  accessory: Galaxy Buds (3.490.000đ),
+  tablet: Xiaomi Pad 6 (7.990.000đ)
+}
+
+=== TOTAL INVENTORY VALUE ===
+1.266.930.000đ
+```
+
+### Bảng tóm tắt Array Methods sử dụng:
+
+| Method | Trong hàm | Mục đích |
+|--------|-----------|---------|
+| `filter()` | getInStock, filterProducts, searchProducts | Lọc phần tử thỏa điều kiện |
+| `map()` | formatProductList | Transform thành object mới |
+| `reduce()` | cheapestByCategory, totalInventoryValue, averageRating | Gộp thành giá trị/object |
+| `sort()` | sortByPrice | Sắp xếp theo điều kiện |
+| `find()` | (không dùng trong B1) | Tìm phần tử đầu tiên |
