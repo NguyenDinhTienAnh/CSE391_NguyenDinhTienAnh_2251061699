@@ -502,142 +502,287 @@ console.log(product.specs.ram);  // 8 ✓
 
 ---
 
-# PHẦN B — THỰC HÀNH CODE (60 điểm)
+# PHẦN C 
 
-## Bài B1 (20đ) — Quản lý Sản phẩm E-Commerce
+## Câu C1 
 
-### File: product_manager.js
+### Trước (Ugly Code): 30+ dòng
 
-**Các hàm được triển khai:**
-
-#### 1. getInStock(products) - `filter()`
 ```javascript
-function getInStock(products) {
-    return products.filter(p => p.stock > 0);
+function processOrders(orders) {
+    var result = [];
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].status === "completed") {
+            if (orders[i].total > 100000) {
+                var item = {};
+                item.id = orders[i].id;
+                item.customer = orders[i].customer;
+                item.total = orders[i].total;
+                item.discount = orders[i].total * 0.1;
+                item.finalTotal = orders[i].total - item.discount;
+                result.push(item);
+            }
+        }
+    }
+    // Bubble sort
+    for (var j = 0; j < result.length; j++) {
+        for (var k = j + 1; k < result.length; k++) {
+            if (result[j].finalTotal < result[k].finalTotal) {
+                var temp = result[j];
+                result[j] = result[k];
+                result[k] = temp;
+            }
+        }
+    }
+    return result;
 }
 ```
-- Lọc sản phẩm có `stock > 0`
-- Output: 9 sản phẩm (loại iPad Air)
 
-#### 2. filterProducts(products, category, minPrice, maxPrice) - `filter()`
+**Vấn đề:**
+-  Sử dụng `var` (scope issues)
+-  Nested for loops phức tạp
+-  Bubble sort O(n²) chậm
+-  Manual object creation
+-  Khó đọc, khó bảo trì
+
+### Sau (Clean Code): 8 dòng
+
 ```javascript
-function filterProducts(products, category, minPrice, maxPrice) {
-    return products.filter(p => 
-        p.category === category && 
-        p.price >= minPrice && 
-        p.price <= maxPrice
-    );
+function processOrders(orders) {
+    return orders
+        .filter(order => order.status === "completed" && order.total > 100000)
+        .map(({ id, customer, total }) => ({
+            id,
+            customer,
+            total,
+            discount: total * 0.1,
+            finalTotal: total * 0.9
+        }))
+        .sort((a, b) => b.finalTotal - a.finalTotal);
 }
 ```
-- Filter kết hợp 3 điều kiện: category + min/max price
-- Output: [iPhone 16, Samsung S24, Pixel 9] cho phones 15-25 triệu
 
-#### 3. sortByPrice(products, order = "asc") - `sort()`
+**Cải thiện:**
+-  Dùng `const` (block scope, safer)
+-  Chain array methods (declarative)
+-  `.sort()` tối ưu O(n log n)
+-  Destructuring + object shorthand
+-  Arrow functions
+-  Dễ đọc, dễ test, dễ bảo trì
+
+**So sánh:**
+
+| Aspect | Trước | Sau |
+|--------|--------|--------|
+| Dòng code | 30+ | 8 |
+| Readability | Xấu | Tuyệt |
+| Performance | O(n + n²) | O(n log n) |
+| Maintainability | Khó | Dễ |
+| Modern JS | Không | Có |
+
+**Kết quả test với dữ liệu:**
+
 ```javascript
-function sortByPrice(products, order = "asc") {
-    return [...products].sort((a, b) => 
-        order === "asc" ? a.price - b.price : b.price - a.price
-    );
-}
+const testOrders = [
+    { id: 1, customer: "Nguyễn A", total: 500000, status: "completed" },
+    { id: 2, customer: "Trần B", total: 80000, status: "completed" },
+    { id: 3, customer: "Lê C", total: 200000, status: "pending" },
+    { id: 4, customer: "Phạm D", total: 150000, status: "completed" },
+    { id: 5, customer: "Hoàng E", total: 300000, status: "completed" }
+];
+
+processOrders(testOrders);
 ```
-- `[...products]` tạo shallow copy để không mutate gốc
-- Sắp xếp tăng (asc) hoặc giảm (desc)
 
-#### 4. cheapestByCategory(products) - `reduce()`
+**Output (sắp xếp giảm dần theo finalTotal):**
 ```javascript
-function cheapestByCategory(products) {
-    return products.reduce((result, product) => {
-        const category = product.category;
-        if (!result[category] || product.price < result[category].price) {
-            result[category] = product;
+[
+    { id: 1, customer: "Nguyễn A", total: 500000, discount: 50000, finalTotal: 450000 },
+    { id: 5, customer: "Hoàng E", total: 300000, discount: 30000, finalTotal: 270000 },
+    { id: 4, customer: "Phạm D", total: 150000, discount: 15000, finalTotal: 135000 }
+]
+```
+
+**Giải thích chi tiết:**
+
+1. `.filter()` - Lọc 2 điều kiện:
+   - `status === "completed"` → loại Lê C (pending)
+   - `total > 100000` → loại Trần B (80000)
+
+2. `.map()` - Transform mỗi order:
+   - Destructuring: `{ id, customer, total }` từ order
+   - Tính: `discount = total * 0.1`, `finalTotal = total * 0.9`
+   - Trả về object mới
+
+3. `.sort()` - Sắp xếp giảm dần:
+   - `(a, b) => b.finalTotal - a.finalTotal`
+   - 450000 > 270000 > 135000
+
+---
+
+## Câu C2
+
+### Yêu cầu:
+Tự viết `map`, `filter`, `reduce` (không dùng built-in Array methods)
+
+### Triển khai:
+
+```javascript
+const miniArray = {
+    // map(arr, fn) - Transform mỗi element
+    map(arr, fn) {
+        const result = [];
+        for (let i = 0; i < arr.length; i++) {
+            result.push(fn(arr[i], i, arr));
         }
         return result;
-    }, {});
-}
+    },
+    
+    // filter(arr, fn) - Giữ lại elements thỏa điều kiện
+    filter(arr, fn) {
+        const result = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (fn(arr[i], i, arr)) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    },
+    
+    // reduce(arr, fn, initialValue) - Gộp lại thành 1 giá trị
+    reduce(arr, fn, initialValue) {
+        let accumulator = initialValue;
+        let startIndex = 0;
+        
+        // Nếu không có initialValue, dùng phần tử đầu tiên
+        if (initialValue === undefined) {
+            accumulator = arr[0];
+            startIndex = 1;
+        }
+        
+        for (let i = startIndex; i < arr.length; i++) {
+            accumulator = fn(accumulator, arr[i], i, arr);
+        }
+        
+        return accumulator;
+    }
+};
 ```
-- `reduce()` để group và tìm sản phẩm rẻ nhất mỗi category
-- Output: 
-  ```
-  {
-    phone: { id: 9, name: "Pixel 9", price: 19990000, ... },
-    laptop: { id: 10, name: "ThinkPad X1", price: 32990000, ... },
-    accessory: { id: 7, name: "Galaxy Buds", price: 3490000, ... },
-    tablet: { id: 8, name: "Xiaomi Pad 6", price: 7990000, ... }
-  }
-  ```
 
-#### 5. totalInventoryValue(products) - `reduce()`
+### Chi tiết từng method:
+
+#### 1. map(arr, fn)
+
+**Cách hoạt động:**
+- Loop qua mỗi element
+- Call `fn(element, index, array)` với đủ 3 tham số
+- Push kết quả vào array mới
+- Return array mới
+
+**Test cases:**
 ```javascript
-function totalInventoryValue(products) {
-    return products.reduce((total, p) => total + (p.price * p.stock), 0);
-}
-```
-- Tính tổng: Σ(price × stock) cho mỗi sản phẩm
-- Output: 1.266.930.000đ
+console.log(miniArray.map([1, 2, 3], x => x * 2));
+// → [2, 4, 6] ✓
 
-#### 6. formatProductList(products) - `map()`
+console.log(miniArray.map([1, 2, 3, 4], x => x ** 2));
+// → [1, 4, 9, 16] ✓
+```
+
+#### 2. filter(arr, fn)
+
+**Cách hoạt động:**
+- Loop qua mỗi element
+- Nếu `fn(element)` return **true** → push vào result
+- Return array mới chỉ chứa elements thỏa điều kiện
+
+**Test cases:**
 ```javascript
-function formatProductList(products) {
-    return products.map(p => ({
-        name: p.name,
-        formattedPrice: p.price.toLocaleString('vi-VN') + "đ"
-    }));
-}
-```
-- Transform mỗi sản phẩm thành {name, formattedPrice}
-- `toLocaleString('vi-VN')` định dạng giá theo chuẩn Việt Nam
-- Output: [{ name: "iPhone 16", formattedPrice: "25.990.000đ" }, ...]
+console.log(miniArray.filter([1, 2, 3, 4], x => x > 2));
+// → [3, 4] ✓
 
-#### 7. averageRating(products) - `reduce()`
+console.log(miniArray.filter([1, 2, 3, 4], x => x % 2 === 0));
+// → [2, 4] ✓ (số chẵn)
+```
+
+#### 3. reduce(arr, fn, initialValue)
+
+**Cách hoạt động (với initialValue):**
 ```javascript
-function averageRating(products) {
-    const sum = products.reduce((total, p) => total + p.rating, 0);
-    return (sum / products.length).toFixed(2);
-}
-```
-- `reduce()` tính tổng rating
-- Chia cho số lượng sản phẩm
-- `toFixed(2)` làm tròn 2 chữ số thập phân
-- Output: 4.43
+miniArray.reduce([1, 2, 3, 4], (acc, x) => acc + x, 0)
 
-#### 8. searchProducts(products, keyword) - `filter()`
+Initial: accumulator = 0
+Loop:
+  i=0: accumulator = fn(0, 1) = 0 + 1 = 1
+  i=1: accumulator = fn(1, 2) = 1 + 2 = 3
+  i=2: accumulator = fn(3, 3) = 3 + 3 = 6
+  i=3: accumulator = fn(6, 4) = 6 + 4 = 10
+Return: 10 ✓
+```
+
+**Cách hoạt động (không có initialValue):**
 ```javascript
-function searchProducts(products, keyword) {
-    const lowerKeyword = keyword.toLowerCase();
-    return products.filter(p => p.name.toLowerCase().includes(lowerKeyword));
-}
-```
-- `toLowerCase()` đưa về chữ thường để so sánh case-insensitive
-- `includes()` kiểm tra xem name có chứa keyword không
-- Output: Tìm "iphone" → [iPhone 16], "pro" → [MacBook Pro, AirPods Pro]
+miniArray.reduce([1, 2, 3, 4], (acc, x) => acc + x)
 
-### Kết quả Test:
-
-```
-=== IN-STOCK PRODUCTS ===
-[9 products - loại iPad Air]
-
-=== PHONES 15-25 TRIỆU ===
-[iPhone 16, Samsung S24, Pixel 9]
-
-=== CHEAPEST BY CATEGORY ===
-{
-  phone: Pixel 9 (19.990.000đ),
-  laptop: ThinkPad X1 (32.990.000đ),
-  accessory: Galaxy Buds (3.490.000đ),
-  tablet: Xiaomi Pad 6 (7.990.000đ)
-}
-
-=== TOTAL INVENTORY VALUE ===
-1.266.930.000đ
+Initial: accumulator = arr[0] = 1, startIndex = 1
+Loop:
+  i=1: accumulator = fn(1, 2) = 1 + 2 = 3
+  i=2: accumulator = fn(3, 3) = 3 + 3 = 6
+  i=3: accumulator = fn(6, 4) = 6 + 4 = 10
+Return: 10 ✓
 ```
 
-### Bảng tóm tắt Array Methods sử dụng:
+**Test cases:**
+```javascript
+console.log(miniArray.reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// → 10 ✓
 
-| Method | Trong hàm | Mục đích |
-|--------|-----------|---------|
-| `filter()` | getInStock, filterProducts, searchProducts | Lọc phần tử thỏa điều kiện |
-| `map()` | formatProductList | Transform thành object mới |
-| `reduce()` | cheapestByCategory, totalInventoryValue, averageRating | Gộp thành giá trị/object |
-| `sort()` | sortByPrice | Sắp xếp theo điều kiện |
-| `find()` | (không dùng trong B1) | Tìm phần tử đầu tiên |
+console.log(miniArray.reduce([1, 2, 3, 4], (a, b) => a + b));
+// → 10 ✓ (không có initialValue)
+
+console.log(miniArray.reduce(['a', 'b', 'c'], (acc, x) => acc + x, ''));
+// → 'abc' ✓
+```
+
+### So sánh với built-in Array methods:
+
+```javascript
+// miniArray.map
+console.log(miniArray.map([1,2,3], x => x * 2));      // [2, 4, 6]
+// vs built-in
+console.log([1,2,3].map(x => x * 2));                // [2, 4, 6]
+// ✓ Kết quả giống hệt
+
+// miniArray.filter
+console.log(miniArray.filter([1,2,3,4], x => x > 2)); // [3, 4]
+// vs built-in
+console.log([1,2,3,4].filter(x => x > 2));           // [3, 4]
+// ✓ Kết quả giống hệt
+
+// miniArray.reduce
+console.log(miniArray.reduce([1,2,3,4], (a,b) => a+b, 0)); // 10
+// vs built-in
+console.log([1,2,3,4].reduce((a,b) => a+b, 0));     // 10
+// ✓ Kết quả giống hệt
+```
+
+### Điểm nổi bật của miniArray:
+
+ **Hoàn toàn tương tự built-in methods**
+- Hỗ trợ đủ 3 tham số: element, index, array
+- Hỗ trợ initialValue optional cho reduce()
+- Cơ chế hoạt động 100% tương tự
+
+ **Có thể chain các operations:**
+```javascript
+const result = miniArray.filter(
+    miniArray.map([1, 2, 3, 4, 5], x => x * 2),
+    x => x > 4
+);
+// → [6, 8, 10]
+```
+
+ **Thích hợp cho học tập:**
+- Hiểu rõ cơ chế bên dưới mỗi method
+- Không dùng magic, chỉ dùng for loops
+- Dễ debug và trace execution
+
