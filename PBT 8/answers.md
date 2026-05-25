@@ -258,7 +258,7 @@ let: 2
 
 ---
 
-## Câu A3 (5đ) — Array Methods
+## Câu A3 
 
 Cho mảng: `const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
@@ -319,17 +319,17 @@ const reversed = [...nums].reverse();
 
 | Method | Mục đích | Return | Mutate |
 |--------|---------|--------|--------|
-| `filter()` | Lọc phần tử thỏa điều kiện | Array mới | ❌ |
-| `map()` | Transform mỗi phần tử | Array mới | ❌ |
-| `reduce()` | Gộp thành 1 giá trị | Single value | ❌ |
-| `find()` | Tìm phần tử đầu tiên | Single value | ❌ |
-| `some()` | CÓ phần tử thỏa điều kiện? | Boolean | ❌ |
-| `every()` | TẤT CẢ phần tử thỏa điều kiện? | Boolean | ❌ |
-| `reverse()` | Đảo ngược | Array | ✅ (gốc) |
+| `filter()` | Lọc phần tử thỏa điều kiện | Array mới |  |
+| `map()` | Transform mỗi phần tử | Array mới |  |
+| `reduce()` | Gộp thành 1 giá trị | Single value | |
+| `find()` | Tìm phần tử đầu tiên | Single value |  |
+| `some()` | CÓ phần tử thỏa điều kiện? | Boolean |  |
+| `every()` | TẤT CẢ phần tử thỏa điều kiện? | Boolean |  |
+| `reverse()` | Đảo ngược | Array |  (gốc) |
 
 ---
 
-## Câu A4 (5đ) — Object Destructuring & Spread
+## Câu A4 
 
 ### Không chạy code, dự đoán output:
 
@@ -346,7 +346,7 @@ const product = {
 ```javascript
 const { name, price, specs: { ram, color } } = product;
 console.log(name, price, ram, color);  // iPhone 16 25990000 8 Titan
-console.log(specs);                     // ❌ ReferenceError: specs is not defined
+console.log(specs);                     //  ReferenceError: specs is not defined
 ```
 
 **Giải thích:**
@@ -357,15 +357,15 @@ console.log(specs);                     // ❌ ReferenceError: specs is not defi
 
 **So sánh destructuring:**
 ```javascript
-// ❌ Sai - specs không được tạo ra
+//  Sai - specs không được tạo ra
 const { specs: { ram, color } } = product;
 console.log(specs);  // ReferenceError
 
-// ✅ Đúng - nếu muốn biến specs
+//  Đúng - nếu muốn biến specs
 const { specs } = product;
 console.log(specs);  // { ram: 8, storage: 256, color: "Titan" }
 
-// ✅ Đúng - nếu muốn cả specs và ram
+//  Đúng - nếu muốn cả specs và ram
 const { specs, specs: { ram } } = product;
 ```
 
@@ -398,7 +398,7 @@ copy.specs.ram = 16;
 console.log(product.specs.ram);        // 16 (hay 8? Tại sao?)
 ```
 
-**Output: 16** ❌ (product thay đổi!)
+**Output: 16**  (product thay đổi!)
 
 **Giải thích chi tiết:**
 
@@ -409,14 +409,14 @@ Spread operator chỉ copy **sâu cấp 1 (shallow copy)**:
 product = {
     name: "iPhone 16",          // String - copy by value
     price: 25990000,            // Number - copy by value
-    specs: { ram: 8, ... }      // Object - copy by REFERENCE ⚠️
+    specs: { ram: 8, ... }      // Object - copy by REFERENCE 
 }
 
 // Sau spread:
 copy = {
-    name: "iPhone 16",          // ✅ Copy value riêng
-    price: 25990000,            // ✅ Copy value riêng
-    specs: { ram: 8, ... }      // ⚠️ POINTER ĐẾN CÙNG OBJECT!
+    name: "iPhone 16",          //  Copy value riêng
+    price: 25990000,            //  Copy value riêng
+    specs: { ram: 8, ... }      //  POINTER ĐẾN CÙNG OBJECT!
 }
 
 // Cả product và copy.specs đều trỏ tới cùng 1 object:
@@ -495,7 +495,7 @@ console.log(product.specs.ram);  // 8 ✓
 
 | Method | Cấp 1 | Cấp 2+ | Syntax | Ghi chú |
 |--------|-------|--------|--------|---------|
-| **Spread `{...}`** | ✅ Copy | ⚠️ Reference | `{...obj}` | Nhanh, shallow |
-| **Destructuring** | ✅ Copy | ⚠️ Reference | `{...obj, nested: {...obj.nested}}` | Verbose |
-| **JSON** | ✅ Copy | ✅ Copy | `JSON.parse(JSON.stringify(obj))` | Chậm, không copy functions |
-| **structuredClone()** | ✅ Copy | ✅ Copy | `structuredClone(obj)` | Modern, nhanh, hỗ trợ functions |
+| **Spread `{...}`** | Copy |  Reference | `{...obj}` | Nhanh, shallow |
+| **Destructuring** |  Copy |  Reference | `{...obj, nested: {...obj.nested}}` | Verbose |
+| **JSON** |  Copy |  Copy | `JSON.parse(JSON.stringify(obj))` | Chậm, không copy functions |
+| **structuredClone()** |  Copy |  Copy | `structuredClone(obj)` | Modern, nhanh, hỗ trợ functions |
