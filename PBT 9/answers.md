@@ -295,3 +295,323 @@ document.querySelector(".list").addEventListener("click", (e) => {
 | **A1** | 5đ | DOM tree + querySelector (mỗi 1 đúng = 0.5đ × 10) |
 | **A2** | 5đ | innerHTML vs textContent + XSS fix |
 | **A3** | 5đ | Event bubbling prediction + stopPropagation |
+
+---
+
+# PHẦN B — THỰC HÀNH CODE (70 điểm)
+
+## 📌 Hướng dẫn chung:
+- **Vanilla JavaScript Only** - KHÔNG dùng jQuery, React, Vue, hay bất kỳ framework nào
+- **Mỗi project** có folder riêng với: `index.html`, `style.css`, `app.js`
+- **Event Delegation** - Gắn listeners trên parent, không trên từng element con
+- **DOM Manipulation** - Dùng `createElement` để tạo elements, KHÔNG dùng `innerHTML` cho user-generated content
+- **LocalStorage/SessionStorage** - Persist dữ liệu khi cần
+
+---
+
+## Bài B1 (20đ) — Todo App Hoàn Chỉnh ✅
+
+### 📁 Folder: `todo_app/`
+
+**Chức năng bắt buộc:**
+
+✅ **Thêm todo** - Gõ text + Enter hoặc click nút → Todo xuất hiện trong list
+✅ **Xóa todo** - Click nút ❌ → Todo biến mất
+✅ **Toggle completed** - Click vào text → Gạch ngang (toggle class completed)
+✅ **Đếm** - Hiển thị "X items left" (chỉ đếm chưa completed)
+✅ **Filter** - 3 nút "All / Active / Completed" → lọc hiển thị
+✅ **Clear completed** - Nút xóa tất cả todo đã completed
+✅ **Edit todo** - Double-click vào todo → đổi thành input → Enter để save
+✅ **LocalStorage** - Lưu todos → Refresh trang vẫn còn
+
+**Features được triển khai:**
+
+```javascript
+// ✅ Event Delegation - Bind events lên #todoList
+todoList.addEventListener('click', handleTodoListClick);
+todoList.addEventListener('dblclick', handleTodoListDblClick);
+
+// ✅ CRUD Operations
+- addTodo()              // Create
+- toggleTodo(id)         // Update (toggle completed)
+- editTodo(id, text)     // Update (edit text)
+- deleteTodo(id)         // Delete
+- clearCompleted()       // Batch delete
+
+// ✅ Filter & Display
+- getFilteredTodos()     // Filter by all/active/completed
+- updateStats()          // Update items count
+
+// ✅ Persistence
+- saveToLocalStorage()   // Save todos to localStorage
+- loadFromLocalStorage() // Load todos on page load
+```
+
+**Chấm điểm (20 điểm):**
+- 5đ: CRUD operations (Add, Delete, Toggle, Edit)
+- 5đ: Filter + Count items left
+- 5đ: LocalStorage persistence (save & restore)
+- 5đ: Event Delegation + clean code structure
+
+---
+
+## Bài B2 (20đ) — Interactive Product Catalog ✅
+
+### 📁 Folder: `product_catalog/`
+
+**Chức năng bắt buộc:**
+
+✅ **Render products** - Từ array JS → Tạo HTML cards bằng createElement → Append vào DOM
+✅ **Search realtime** - Gõ vào ô search → Lọc sản phẩm ngay lập tức (dùng event input)
+✅ **Filter by category** - Click buttons category → Chỉ hiển thị category đó
+✅ **Sort** - Dropdown sort by: Giá tăng, Giá giảm, Tên A-Z, Đánh giá cao nhất
+✅ **Card click → Modal** - Click sản phẩm → Hiện modal chi tiết (tạo modal bằng JS)
+✅ **Add to cart badge** - Click "Thêm giỏ" → Icon giỏ hàng góc phải hiện badge số lượng
+✅ **Dark mode toggle** - Nút toggle dark/light mode (thêm/xóa class dark-mode trên body)
+
+**Product Data Structure:**
+
+```javascript
+const products = [
+    { 
+        id: 1, 
+        name: "iPhone 16 Pro Max", 
+        price: 29990000, 
+        category: "phone", 
+        image: "url", 
+        rating: 4.8, 
+        inStock: true, 
+        description: "..." 
+    },
+    // ... 15+ products (4 categories: phone, tablet, laptop, accessory)
+];
+```
+
+**Features được triển khai:**
+
+```javascript
+// ✅ 100% render bằng JavaScript
+- createProductCard(product)  // Tạo DOM element từ product object
+- render()                    // Render all visible products
+
+// ✅ Tách functions rõ ràng
+- searchProducts(query)       // Real-time search
+- filterByCategory(category)  // Category filter
+- sortProducts()              // Sort by multiple criteria
+
+// ✅ Modal Management
+- openProductModal(id)        // Show product details
+- closeModal()                // Close modal
+- addToCart()                 // Add to cart & update badge
+
+// ✅ Dark Mode
+- toggleDarkMode()            // Toggle dark mode class
+- loadDarkMode()              // Load from localStorage
+```
+
+**Chấm điểm (20 điểm):**
+- 4đ: Render products from JS array
+- 4đ: Search + Filter functionality
+- 4đ: Sort options (6 sort criteria)
+- 4đ: Modal + Cart badge
+- 4đ: Dark mode + responsive design
+
+---
+
+## Bài B3 (15đ) — Form Validator ✅
+
+### 📁 Folder: `form_validator/`
+
+**Chức năng bắt buộc:**
+
+✅ **Full Name** - 2-50 ký tự → ✅/❌ icon hiển thị real-time
+✅ **Email** - Regex validate → Thông báo lỗi cụ thể
+✅ **Password strength meter** - 
+   - Yếu (đỏ): < 8 ký tự
+   - Trung bình (vàng): 8+ ký tự, có chữ + số
+   - Mạnh (xanh): 8+ ký tự, có chữ hoa + thường + số + ký tự đặc biệt
+   - Thanh progress bar đổi màu theo strength
+✅ **Confirm password** - Real-time check khớp với password
+✅ **Phone** - 10 chữ số → Tự thêm dấu gạch: 0901-234-567
+✅ **Submit button** - Disabled cho đến khi tất cả fields valid
+✅ **Success modal** - Khi submit, hiện modal "Đăng ký thành công!" với thông tin đã nhập
+
+**Validation Rules:**
+
+```javascript
+// Name validation
+- Length: 2-50 characters
+- Required: Yes
+
+// Email validation
+- Regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+- Required: Yes
+
+// Password strength
+const requirements = [
+    { regex: /.{8,}/, description: "8+ characters" },
+    { regex: /[A-Z]/, description: "Uppercase letter" },
+    { regex: /[a-z]/, description: "Lowercase letter" },
+    { regex: /\d/, description: "Number" },
+    { regex: /[!@#$%^&*...]/, description: "Special character" }
+];
+// Strength levels: weak (<3), medium (3-4), strong (5)
+
+// Phone formatting
+- Input: "0901234567" → Display: "0901-234-567"
+- Auto-format as user types
+```
+
+**Features được triển khai:**
+
+```javascript
+// ✅ Real-time validation
+- validateFullName()
+- validateEmail()
+- validatePassword()      // + strength meter
+- validateConfirmPassword()
+- validatePhone()         // + auto-formatting
+
+// ✅ UI Updates
+- showSuccess(input)      // Green checkmark
+- showError(input, msg)   // Red X + error message
+- updateStrengthMeter()   // Color-coded bar
+
+// ✅ Form Control
+- updateSubmitButton()    // Enable/disable based on validation
+- handleSubmit()          // Show success modal
+```
+
+**Chấm điểm (15 điểm):**
+- 3đ: Name, Email, Phone validation
+- 3đ: Password strength meter
+- 3đ: Real-time validation + UI feedback
+- 3đ: Confirm password + auto-formatting
+- 3đ: Submit button control + success modal
+
+---
+
+## Bài B4 (15đ) — Keyboard Shortcuts & Accessibility ✅
+
+### 📁 Folder: `keyboard_app/`
+
+**Chức năng bắt buộc:**
+
+#### Gallery ảnh:
+✅ **Mũi tên ← →** - Chuyển ảnh trước/sau
+✅ **Số 1-9** - Nhảy đến ảnh tương ứng
+✅ **Space** - Play/pause slideshow tự động
+✅ **Escape** - Đóng modal
+
+#### Command Palette:
+✅ **Ctrl+K** - Mở ô tìm kiếm overlay (giống VS Code)
+✅ **Gõ keyword** - Hiện danh sách commands
+✅ **Enter** - Chọn command
+✅ **Escape** - Đóng palette
+
+#### Focus Management:
+✅ **Tab** - Di chuyển qua các elements
+✅ **Focus ring visible** - Các interactive elements có border focus rõ
+✅ **ARIA labels** - Screen reader support
+✅ **Live regions** - Thông báo tự động cho screen reader
+
+**Keyboard Shortcuts:**
+
+```javascript
+// Gallery Navigation
+← / →        → Previous/Next image
+1-6          → Jump to image #
+Space        → Play/Pause slideshow
+Escape       → Close modals
+
+// Command Palette
+Ctrl+K       → Open command palette
+↑/↓          → Select command
+Enter        → Execute command
+Escape       → Close palette
+
+// General
+Tab          → Focus next element
+Shift+Tab    → Focus previous
+```
+
+**Features được triển khai:**
+
+```javascript
+// ✅ Keyboard Event Handling
+- Arrow keys (←→) → Gallery navigation
+- Number keys (1-6) → Jump to image
+- Space → Play/pause
+- Ctrl+K → Command palette
+- Escape → Close modals
+- Tab → Focus management
+
+// ✅ Command Palette
+- filterCommands(query)    // Search commands
+- renderCommands(cmds)     // Render command list
+- executeCommand(cmd)      // Execute selected
+
+// ✅ Gallery
+- nextImage(), prevImage()
+- playSlideshow(), pauseSlideshow()
+- updateGalleryDisplay()
+
+// ✅ Accessibility
+- announceChange(msg)      // Live region announcement
+- Focus indicators        // Visible focus ring (3px outline)
+- ARIA labels             // On all buttons
+- aria-live regions       // For status updates
+```
+
+**Accessibility Features:**
+
+| Feature | Implementation |
+|---------|------------------|
+| Focus Ring | 3px solid outline on all interactive elements |
+| ARIA Labels | `aria-label` on buttons: "Previous image", "Play slideshow" |
+| Live Regions | `aria-live="polite"` for status updates |
+| Keyboard Shortcuts | Full keyboard navigation supported |
+| Focus Management | Focus stays within modals (tab trap) |
+| Screen Reader | All interactive elements announced |
+
+**Chấm điểm (15 điểm):**
+- 3đ: Keyboard shortcuts (arrow keys, number keys, space)
+- 3đ: Command palette (Ctrl+K, search, execute)
+- 3đ: Focus management + focus rings
+- 3đ: ARIA labels + live regions
+- 3đ: User experience + accessibility best practices
+
+---
+
+## 📊 Tóm tắt PHẦN B (70 điểm):
+
+| Bài | Folder | Điểm | Chức năng chính |
+|-----|--------|------|-----------------|
+| **B1** | `todo_app/` | 20đ | CRUD, Filter, LocalStorage, Event Delegation |
+| **B2** | `product_catalog/` | 20đ | Search, Filter, Sort, Modal, Cart, Dark Mode |
+| **B3** | `form_validator/` | 15đ | Real-time Validation, Password Strength, Auto-format |
+| **B4** | `keyboard_app/` | 15đ | Keyboard Shortcuts, Command Palette, Accessibility |
+
+---
+
+## ✅ Checklist hoàn thành:
+
+- [x] B1: Todo App (HTML, CSS, JS) - Event delegation, LocalStorage
+- [x] B2: Product Catalog (HTML, CSS, JS) - Dynamic render, Dark mode
+- [x] B3: Form Validator (HTML, CSS, JS) - Real-time validation
+- [x] B4: Keyboard App (HTML, CSS, JS) - Accessibility, Keyboard shortcuts
+
+---
+
+## 🚀 Cách chạy từng project:
+
+Mở file `index.html` bằng browser hoặc Live Server trong VS Code:
+
+```bash
+# VS Code Live Server
+Right-click index.html → "Open with Live Server"
+
+# Hoặc double-click index.html
+```
+
+Mỗi project hoàn toàn độc lập, không cần install dependencies (Vanilla JavaScript).

@@ -1,0 +1,580 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ==================== FOCUS STYLES ==================== */
+*:focus {
+    outline: 3px solid #ffd93d;
+    outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+a:focus {
+    outline: 3px solid #ffd93d;
+    outline-offset: 2px;
+}
+
+/* Skip to main (accessibility) */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #667eea;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}
+
+/* ==================== HEADER ==================== */
+.header {
+    background: white;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.header-subtitle {
+    color: #666;
+    font-size: 0.95em;
+}
+
+.help-btn {
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 20px;
+}
+
+.help-btn:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+}
+
+/* ==================== MAIN ==================== */
+.main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-size: 1.6em;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+/* ==================== GALLERY SECTION ==================== */
+.gallery-section {
+    /* Additional styles */
+}
+
+.gallery-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery-btn {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.gallery-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.gallery-btn:active {
+    transform: translateY(0);
+}
+
+.gallery-btn.play-pause {
+    background: #4caf50;
+}
+
+.gallery-btn.play-pause:hover {
+    background: #45a049;
+}
+
+.gallery-counter {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.gallery-viewer {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #f5f5f5;
+}
+
+.gallery-viewer img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-viewer:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.keyboard-hint {
+    font-size: 0.95em;
+}
+
+/* Image Thumbnails */
+.image-thumbnails {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.thumbnails-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #667eea;
+    user-select: none;
+}
+
+.thumbnail:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.thumbnail.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* ==================== INTERACTIVE SECTION ==================== */
+.interactive-section {
+    /* Additional styles */
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.interactive-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.interactive-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.interactive-btn:active {
+    transform: translateY(-1px);
+}
+
+.interactive-btn:focus {
+    outline: 3px solid #ffd93d;
+    outline-offset: 2px;
+}
+
+.focus-info {
+    padding: 15px;
+    background: #f0f7ff;
+    border-left: 4px solid #667eea;
+    border-radius: 6px;
+    color: #333;
+}
+
+/* ==================== SHORTCUTS SECTION ==================== */
+.shortcuts-section {
+    /* Additional styles */
+}
+
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+kbd {
+    display: inline-block;
+    padding: 4px 8px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 30px;
+    text-align: center;
+}
+
+.shortcut-item span {
+    color: #666;
+    font-size: 0.95em;
+}
+
+/* ==================== MODALS ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Command Palette */
+.command-palette {
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.palette-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.palette-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.command-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1em;
+    background: white;
+}
+
+.command-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.palette-hint {
+    display: block;
+    font-size: 0.85em;
+    color: #999;
+    margin-top: 8px;
+}
+
+.command-list {
+    overflow-y: auto;
+    flex: 1;
+    max-height: 300px;
+}
+
+.command-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.command-item:hover {
+    background: #f8f9fa;
+}
+
+.command-item.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.command-item-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.command-item-desc {
+    font-size: 0.85em;
+    opacity: 0.7;
+}
+
+/* Help Modal */
+.help-modal {
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 30px;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.help-content h3 {
+    font-size: 1.1em;
+    color: #667eea;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.help-content ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.help-content li {
+    padding: 8px 0;
+    color: #666;
+}
+
+.help-content strong {
+    color: #333;
+}
+
+.close-help-btn {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.close-help-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .help-btn {
+        margin-left: 0;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    section h2 {
+        font-size: 1.3em;
+    }
+
+    .gallery-controls {
+        flex-direction: column;
+    }
+
+    .gallery-btn {
+        width: 100%;
+    }
+
+    .shortcuts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .interactive-btn {
+        width: 100%;
+    }
+
+    .palette-content {
+        width: 95%;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+}

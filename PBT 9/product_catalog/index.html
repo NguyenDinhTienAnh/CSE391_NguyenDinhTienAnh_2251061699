@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">🛍️ ShopHub</h1>
+            <div class="navbar-right">
+                <button id="darkModeBtn" class="dark-mode-btn" aria-label="Toggle dark mode">🌙</button>
+                <div class="cart-icon">
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="filter-group">
+                <h3>Search</h3>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search products..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="filter-group">
+                <h3>Category</h3>
+                <div id="categoryFilter" class="category-filter"></div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Sort By</h3>
+                <select id="sortSelect" class="sort-select">
+                    <option value="default">Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                    <option value="rating">Rating: Highest First</option>
+                </select>
+            </div>
+        </aside>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="products-header">
+                <h2 id="productsTitle">All Products</h2>
+                <span id="productCount" class="product-count">0 results</span>
+            </div>
+
+            <div id="productGrid" class="product-grid"></div>
+
+            <div id="emptyState" class="empty-state">
+                <p>😕 No products found. Try adjusting your filters!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalCategory" class="modal-category"></p>
+                    <div class="modal-rating">
+                        <span id="modalRating"></span>
+                        <span id="modalStock" class="modal-stock"></span>
+                    </div>
+                    <p id="modalDescription" class="modal-description"></p>
+                    <div class="modal-price">
+                        <span id="modalPrice" class="price"></span>
+                    </div>
+                    <button id="addToCartBtn" class="add-to-cart-btn">🛒 Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 My Todo App</h1>
+            <p class="subtitle">Organize your tasks efficiently</p>
+        </header>
+
+        <main class="todo-container">
+            <!-- Input Section -->
+            <div class="input-section">
+                <input 
+                    type="text" 
+                    id="todoInput" 
+                    class="todo-input" 
+                    placeholder="Add a new task... (press Enter)"
+                    autocomplete="off"
+                >
+                <button id="addBtn" class="add-btn">Add</button>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats">
+                <span id="itemsLeft" class="items-count">0 items left</span>
+                <button id="clearBtn" class="clear-btn">Clear Completed</button>
+            </div>
+
+            <!-- Todo List -->
+            <ul id="todoList" class="todo-list"></ul>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+                <p>✨ No tasks yet. Add one to get started!</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
