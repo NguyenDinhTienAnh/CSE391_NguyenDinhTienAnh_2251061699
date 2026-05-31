@@ -298,320 +298,328 @@ document.querySelector(".list").addEventListener("click", (e) => {
 
 ---
 
-# PHẦN B — THỰC HÀNH CODE (70 điểm)
+# PHẦN C 
 
-## 📌 Hướng dẫn chung:
-- **Vanilla JavaScript Only** - KHÔNG dùng jQuery, React, Vue, hay bất kỳ framework nào
-- **Mỗi project** có folder riêng với: `index.html`, `style.css`, `app.js`
-- **Event Delegation** - Gắn listeners trên parent, không trên từng element con
-- **DOM Manipulation** - Dùng `createElement` để tạo elements, KHÔNG dùng `innerHTML` cho user-generated content
-- **LocalStorage/SessionStorage** - Persist dữ liệu khi cần
+## Câu C1 
+
+### Tìm và sửa tất cả lỗi (7 lỗi chính):
+
+#### **Lỗi 1**: Sai tên event (dòng 17)
+```javascript
+// ❌ SAI:
+document.querySelector("#decrementBtn").addEventListener("onclick", function() {
+
+// ✅ ĐÚNG:
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+```
+**Giải thích**: `addEventListener` dùng tên event là "click", không phải "onclick" (đó là attribute HTML cũ)
 
 ---
 
-## Bài B1 (20đ) — Todo App Hoàn Chỉnh ✅
-
-### 📁 Folder: `todo_app/`
-
-**Chức năng bắt buộc:**
-
-✅ **Thêm todo** - Gõ text + Enter hoặc click nút → Todo xuất hiện trong list
-✅ **Xóa todo** - Click nút ❌ → Todo biến mất
-✅ **Toggle completed** - Click vào text → Gạch ngang (toggle class completed)
-✅ **Đếm** - Hiển thị "X items left" (chỉ đếm chưa completed)
-✅ **Filter** - 3 nút "All / Active / Completed" → lọc hiển thị
-✅ **Clear completed** - Nút xóa tất cả todo đã completed
-✅ **Edit todo** - Double-click vào todo → đổi thành input → Enter để save
-✅ **LocalStorage** - Lưu todos → Refresh trang vẫn còn
-
-**Features được triển khai:**
-
+#### **Lỗi 2**: Gán giá trị sai cho DOM element (dòng 23)
 ```javascript
-// ✅ Event Delegation - Bind events lên #todoList
-todoList.addEventListener('click', handleTodoListClick);
-todoList.addEventListener('dblclick', handleTodoListDblClick);
+// ❌ SAI:
+countDisplay = count;  // Gán số vào biến - mất reference tới DOM element!
 
-// ✅ CRUD Operations
-- addTodo()              // Create
-- toggleTodo(id)         // Update (toggle completed)
-- editTodo(id, text)     // Update (edit text)
-- deleteTodo(id)         // Delete
-- clearCompleted()       // Batch delete
-
-// ✅ Filter & Display
-- getFilteredTodos()     // Filter by all/active/completed
-- updateStats()          // Update items count
-
-// ✅ Persistence
-- saveToLocalStorage()   // Save todos to localStorage
-- loadFromLocalStorage() // Load todos on page load
+// ✅ ĐÚNG:
+countDisplay.textContent = count;  // Hoặc: countDisplay.innerHTML = count;
 ```
-
-**Chấm điểm (20 điểm):**
-- 5đ: CRUD operations (Add, Delete, Toggle, Edit)
-- 5đ: Filter + Count items left
-- 5đ: LocalStorage persistence (save & restore)
-- 5đ: Event Delegation + clean code structure
+**Giải thích**: `countDisplay = count;` ghi đè biến, từ đó `countDisplay` không còn là reference tới DOM element nữa, các lần sau không thể update được.
 
 ---
 
-## Bài B2 (20đ) — Interactive Product Catalog ✅
-
-### 📁 Folder: `product_catalog/`
-
-**Chức năng bắt buộc:**
-
-✅ **Render products** - Từ array JS → Tạo HTML cards bằng createElement → Append vào DOM
-✅ **Search realtime** - Gõ vào ô search → Lọc sản phẩm ngay lập tức (dùng event input)
-✅ **Filter by category** - Click buttons category → Chỉ hiển thị category đó
-✅ **Sort** - Dropdown sort by: Giá tăng, Giá giảm, Tên A-Z, Đánh giá cao nhất
-✅ **Card click → Modal** - Click sản phẩm → Hiện modal chi tiết (tạo modal bằng JS)
-✅ **Add to cart badge** - Click "Thêm giỏ" → Icon giỏ hàng góc phải hiện badge số lượng
-✅ **Dark mode toggle** - Nút toggle dark/light mode (thêm/xóa class dark-mode trên body)
-
-**Product Data Structure:**
-
+#### **Lỗi 3**: DecrementBtn không cập nhật history (dòng 20-22)
 ```javascript
-const products = [
-    { 
-        id: 1, 
-        name: "iPhone 16 Pro Max", 
-        price: 29990000, 
-        category: "phone", 
-        image: "url", 
-        rating: 4.8, 
-        inStock: true, 
-        description: "..." 
-    },
-    // ... 15+ products (4 categories: phone, tablet, laptop, accessory)
-];
+// ❌ SAI:
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+    count--;
+    countDisplay.innerHTML = count;
+    // Thiếu: không thêm vào history như incrementBtn!
+});
+
+// ✅ ĐÚNG:
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+    count--;
+    countDisplay.innerHTML = count;
+    
+    // Lưu history - giống như incrementBtn
+    const li = document.createElement("li");
+    li.textContent = "Count changed to " + count;
+    li.addEventListener("click", function() {
+        deleteHistory(this);
+    });
+    historyList.append(li);
+});
 ```
-
-**Features được triển khai:**
-
-```javascript
-// ✅ 100% render bằng JavaScript
-- createProductCard(product)  // Tạo DOM element từ product object
-- render()                    // Render all visible products
-
-// ✅ Tách functions rõ ràng
-- searchProducts(query)       // Real-time search
-- filterByCategory(category)  // Category filter
-- sortProducts()              // Sort by multiple criteria
-
-// ✅ Modal Management
-- openProductModal(id)        // Show product details
-- closeModal()                // Close modal
-- addToCart()                 // Add to cart & update badge
-
-// ✅ Dark Mode
-- toggleDarkMode()            // Toggle dark mode class
-- loadDarkMode()              // Load from localStorage
-```
-
-**Chấm điểm (20 điểm):**
-- 4đ: Render products from JS array
-- 4đ: Search + Filter functionality
-- 4đ: Sort options (6 sort criteria)
-- 4đ: Modal + Cart badge
-- 4đ: Dark mode + responsive design
 
 ---
 
-## Bài B3 (15đ) — Form Validator ✅
-
-### 📁 Folder: `form_validator/`
-
-**Chức năng bắt buộc:**
-
-✅ **Full Name** - 2-50 ký tự → ✅/❌ icon hiển thị real-time
-✅ **Email** - Regex validate → Thông báo lỗi cụ thể
-✅ **Password strength meter** - 
-   - Yếu (đỏ): < 8 ký tự
-   - Trung bình (vàng): 8+ ký tự, có chữ + số
-   - Mạnh (xanh): 8+ ký tự, có chữ hoa + thường + số + ký tự đặc biệt
-   - Thanh progress bar đổi màu theo strength
-✅ **Confirm password** - Real-time check khớp với password
-✅ **Phone** - 10 chữ số → Tự thêm dấu gạch: 0901-234-567
-✅ **Submit button** - Disabled cho đến khi tất cả fields valid
-✅ **Success modal** - Khi submit, hiện modal "Đăng ký thành công!" với thông tin đã nhập
-
-**Validation Rules:**
-
+#### **Lỗi 4 & 6**: innerHTML = null thay vì innerHTML = "" (dòng 24 & 34)
 ```javascript
-// Name validation
-- Length: 2-50 characters
-- Required: Yes
+// ❌ SAI:
+historyList.innerHTML = null;  // null không phải cách đúng
 
-// Email validation
-- Regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-- Required: Yes
-
-// Password strength
-const requirements = [
-    { regex: /.{8,}/, description: "8+ characters" },
-    { regex: /[A-Z]/, description: "Uppercase letter" },
-    { regex: /[a-z]/, description: "Lowercase letter" },
-    { regex: /\d/, description: "Number" },
-    { regex: /[!@#$%^&*...]/, description: "Special character" }
-];
-// Strength levels: weak (<3), medium (3-4), strong (5)
-
-// Phone formatting
-- Input: "0901234567" → Display: "0901-234-567"
-- Auto-format as user types
+// ✅ ĐÚNG:
+historyList.innerHTML = "";    // Hoặc: historyList.textContent = "";
 ```
-
-**Features được triển khai:**
-
-```javascript
-// ✅ Real-time validation
-- validateFullName()
-- validateEmail()
-- validatePassword()      // + strength meter
-- validateConfirmPassword()
-- validatePhone()         // + auto-formatting
-
-// ✅ UI Updates
-- showSuccess(input)      // Green checkmark
-- showError(input, msg)   // Red X + error message
-- updateStrengthMeter()   // Color-coded bar
-
-// ✅ Form Control
-- updateSubmitButton()    // Enable/disable based on validation
-- handleSubmit()          // Show success modal
-```
-
-**Chấm điểm (15 điểm):**
-- 3đ: Name, Email, Phone validation
-- 3đ: Password strength meter
-- 3đ: Real-time validation + UI feedback
-- 3đ: Confirm password + auto-formatting
-- 3đ: Submit button control + success modal
+**Giải thích**: `innerHTML = null` không clean HTML đúng cách. Dùng `""` (empty string) là cách chuẩn.
 
 ---
 
-## Bài B4 (15đ) — Keyboard Shortcuts & Accessibility ✅
+#### **Lỗi 5**: Thiếu dấu ngoặc () khi gọi function (dòng 29)
+```javascript
+// ❌ SAI:
+items.forEach(item => {
+    item.remove;  // Chỉ reference function, không gọi nó!
+});
 
-### 📁 Folder: `keyboard_app/`
+// ✅ ĐÚNG:
+items.forEach(item => {
+    item.remove();  // Phải có () để gọi function
+});
+```
+**Giải thích**: `item.remove;` là reference tới function, không thực thi. Cần `item.remove();` để gọi.
 
-**Chức năng bắt buộc:**
+---
 
-#### Gallery ảnh:
-✅ **Mũi tên ← →** - Chuyển ảnh trước/sau
-✅ **Số 1-9** - Nhảy đến ảnh tương ứng
-✅ **Space** - Play/pause slideshow tự động
-✅ **Escape** - Đóng modal
+#### **Lỗi 7**: localStorage trả về string, cần convert sang number (dòng 39)
+```javascript
+// ❌ SAI:
+count = localStorage.getItem("count");  // Trả về string "5" chứ không phải số 5
+countDisplay.textContent = count;       // "5" + 1 = "51" (string concatenation!)
 
-#### Command Palette:
-✅ **Ctrl+K** - Mở ô tìm kiếm overlay (giống VS Code)
-✅ **Gõ keyword** - Hiện danh sách commands
-✅ **Enter** - Chọn command
-✅ **Escape** - Đóng palette
+// ✅ ĐÚNG:
+count = parseInt(localStorage.getItem("count")) || 0;  // Convert to number, default 0
+countDisplay.textContent = count;
+```
+**Giải thích**: `localStorage` luôn trả về string. Nếu không convert, `count++` sẽ là string concatenation: "5" + 1 = "51"
 
-#### Focus Management:
-✅ **Tab** - Di chuyển qua các elements
-✅ **Focus ring visible** - Các interactive elements có border focus rõ
-✅ **ARIA labels** - Screen reader support
-✅ **Live regions** - Thông báo tự động cho screen reader
+---
 
-**Keyboard Shortcuts:**
+### ✅ CODE ĐÃ SỬA HOÀN CHỈNH:
 
 ```javascript
-// Gallery Navigation
-← / →        → Previous/Next image
-1-6          → Jump to image #
-Space        → Play/Pause slideshow
-Escape       → Close modals
+// App: Counter with history
+const countDisplay = document.querySelector(".count");
+const historyList = document.getElementById("history");
 
-// Command Palette
-Ctrl+K       → Open command palette
-↑/↓          → Select command
-Enter        → Execute command
-Escape       → Close palette
+let count = 0;
 
-// General
-Tab          → Focus next element
-Shift+Tab    → Focus previous
+// ✅ Increment button
+document.querySelector("#incrementBtn").addEventListener("click", function() {
+    count++;
+    countDisplay.textContent = count;  // FIX: Dùng .textContent, không gán trực tiếp
+    
+    // Lưu history
+    const li = document.createElement("li");
+    li.textContent = "Count changed to " + count;
+    li.addEventListener("click", function() {
+        deleteHistory(this);
+    });
+    historyList.append(li);
+});
+
+// ✅ Decrement button (FIX: Thay "onclick" → "click" + thêm history tracking)
+document.querySelector("#decrementBtn").addEventListener("click", function() {  // FIX: "click" không "onclick"
+    count--;
+    countDisplay.textContent = count;
+    
+    // FIX: Thêm history update như incrementBtn
+    const li = document.createElement("li");
+    li.textContent = "Count changed to " + count;
+    li.addEventListener("click", function() {
+        deleteHistory(this);
+    });
+    historyList.append(li);
+});
+
+// ✅ Reset button
+document.querySelector("#resetBtn").addEventListener("click", () => {
+    count = 0;
+    countDisplay.textContent = count;  // FIX: Gán đúng cách
+    historyList.innerHTML = "";        // FIX: "" thay vì null
+});
+
+// ✅ Delete single history item
+function deleteHistory(element) {
+    element.parentNode.removeChild(element);
+}
+
+// ✅ Clear all history
+document.querySelector("#clearHistory").addEventListener("click", () => {
+    const items = historyList.querySelectorAll("li");
+    items.forEach(item => {
+        item.remove();  // FIX: Thêm () để gọi function
+    });
+});
+
+// ✅ Save to localStorage
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("count", count);
+    localStorage.setItem("history", historyList.innerHTML);
+});
+
+// ✅ Load from localStorage  
+window.addEventListener("load", () => {
+    count = parseInt(localStorage.getItem("count")) || 0;  // FIX: Convert to number + default 0
+    countDisplay.textContent = count;
+});
 ```
 
-**Features được triển khai:**
+---
+
+## Câu C2 (7đ) — Performance
+
+### Phần 1: Event Delegation
+
+#### **Tại sao bind event lên 1000 elements riên lẻ là BAD PRACTICE?**
+
+**Vấn đề:**
+```javascript
+// ❌ BAD - 1000 event listeners riên lẻ
+const buttons = document.querySelectorAll(".btn");  // 1000 buttons
+buttons.forEach(btn => {
+    btn.addEventListener("click", handleClick);
+    // → Tạo 1000 function references trong memory
+    // → Mỗi element giữ một listener riêng
+});
+```
+
+**Hậu quả:**
+- 📈 **Chiếm memory nhiều**: 1000 listeners = 1000 function objects trong RAM
+- 🐢 **Chậm khi DOM đổi**: Thêm button mới phải thêm listener manuelly
+- 🔄 **Khó quản lý**: Muốn remove listener phải loop 1000 lần
+
+---
+
+#### **Cách Event Delegation giải quyết:**
 
 ```javascript
-// ✅ Keyboard Event Handling
-- Arrow keys (←→) → Gallery navigation
-- Number keys (1-6) → Jump to image
-- Space → Play/pause
-- Ctrl+K → Command palette
-- Escape → Close modals
-- Tab → Focus management
-
-// ✅ Command Palette
-- filterCommands(query)    // Search commands
-- renderCommands(cmds)     // Render command list
-- executeCommand(cmd)      // Execute selected
-
-// ✅ Gallery
-- nextImage(), prevImage()
-- playSlideshow(), pauseSlideshow()
-- updateGalleryDisplay()
-
-// ✅ Accessibility
-- announceChange(msg)      // Live region announcement
-- Focus indicators        // Visible focus ring (3px outline)
-- ARIA labels             // On all buttons
-- aria-live regions       // For status updates
+// ✅ GOOD - Event Delegation (1 listener)
+document.querySelector(".button-container").addEventListener("click", (e) => {
+    if (e.target.matches(".btn")) {
+        handleClick(e);
+    }
+});
 ```
 
-**Accessibility Features:**
+**Ưu điểm:**
+- 💾 **Tiết kiệm memory**: Chỉ 1 listener dù có 1000 buttons
+- ⚡ **Nhanh hơn**: Dùng event bubbling, không cần lặp
+- 🎯 **Linh hoạt**: Buttons mới được tự động "nhận" events mà không cần code thêm
+- 🧹 **Dễ quản lý**: Remove 1 listener là xong, tất cả buttons mất listener
 
-| Feature | Implementation |
-|---------|------------------|
-| Focus Ring | 3px solid outline on all interactive elements |
-| ARIA Labels | `aria-label` on buttons: "Previous image", "Play slideshow" |
-| Live Regions | `aria-live="polite"` for status updates |
-| Keyboard Shortcuts | Full keyboard navigation supported |
-| Focus Management | Focus stays within modals (tab trap) |
-| Screen Reader | All interactive elements announced |
+**So sánh:**
 
-**Chấm điểm (15 điểm):**
-- 3đ: Keyboard shortcuts (arrow keys, number keys, space)
-- 3đ: Command palette (Ctrl+K, search, execute)
-- 3đ: Focus management + focus rings
-- 3đ: ARIA labels + live regions
-- 3đ: User experience + accessibility best practices
+| Tiêu chí | Bind riêng lẻ | Event Delegation |
+|----------|---------------|------------------|
+| **Memory** | ❌ 1000 listeners | ✅ 1 listener |
+| **DOM mới** | ❌ Thêm code | ✅ Tự động hoạt động |
+| **Hiệu năng** | ❌ Chậm | ✅ Nhanh |
+| **Quản lý** | ❌ Phức tạp | ✅ Đơn giản |
 
 ---
 
-## 📊 Tóm tắt PHẦN B (70 điểm):
+### Phần 2: DocumentFragment Performance
 
-| Bài | Folder | Điểm | Chức năng chính |
-|-----|--------|------|-----------------|
-| **B1** | `todo_app/` | 20đ | CRUD, Filter, LocalStorage, Event Delegation |
-| **B2** | `product_catalog/` | 20đ | Search, Filter, Sort, Modal, Cart, Dark Mode |
-| **B3** | `form_validator/` | 15đ | Real-time Validation, Password Strength, Auto-format |
-| **B4** | `keyboard_app/` | 15đ | Keyboard Shortcuts, Command Palette, Accessibility |
-
----
-
-## ✅ Checklist hoàn thành:
-
-- [x] B1: Todo App (HTML, CSS, JS) - Event delegation, LocalStorage
-- [x] B2: Product Catalog (HTML, CSS, JS) - Dynamic render, Dark mode
-- [x] B3: Form Validator (HTML, CSS, JS) - Real-time validation
-- [x] B4: Keyboard App (HTML, CSS, JS) - Accessibility, Keyboard shortcuts
-
----
-
-## 🚀 Cách chạy từng project:
-
-Mở file `index.html` bằng browser hoặc Live Server trong VS Code:
-
-```bash
-# VS Code Live Server
-Right-click index.html → "Open with Live Server"
-
-# Hoặc double-click index.html
+#### **Bài toán gốc (Inefficient):**
+```javascript
+// ❌ BAD - Tạo 1000 reflows
+const list = document.getElementById("myList");
+for (let i = 1; i <= 1000; i++) {
+    const li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+    list.appendChild(li);  // ← Mỗi lần append = 1 reflow!
+    // → 1000 reflows tổng cộng 😱
+}
 ```
 
-Mỗi project hoàn toàn độc lập, không cần install dependencies (Vanilla JavaScript).
+---
+
+#### **Giải pháp: DocumentFragment**
+```javascript
+// ✅ GOOD - Chỉ 1 reflow
+const list = document.getElementById("myList");
+const fragment = document.createDocumentFragment();
+
+for (let i = 1; i <= 1000; i++) {
+    const li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+    fragment.appendChild(li);  // ← Append vào fragment (not real DOM)
+}
+
+list.appendChild(fragment);  // ← Chỉ 1 lần append thật vào DOM = 1 reflow!
+```
+
+---
+
+#### **Tại sao nhanh hơn?**
+
+**Hiểu Reflow:**
+- Reflow = Trình duyệt recalculate layout của trang
+- Mỗi lần thêm element vào DOM → 1 reflow
+- Reflow quá nhiều = browser lag, animation chập
+
+**DocumentFragment:**
+- Fragment **KHÔNG** phải part của real DOM
+- Append vào fragment → KHÔNG trigger reflow
+- Append fragment vào DOM → trigger **1 reflow duy nhất**
+
+**So sánh tốc độ:**
+
+```
+❌ BAD:   1000 reflows (1000 append riên lẻ)
+✅ GOOD:  1 reflow (1 append fragment)
+
+→ Tốc độ: GOOD nhanh hơn ~100x lần!
+```
+
+---
+
+#### **Ví dụ so sánh hiệu năng:**
+
+```javascript
+// ❌ SLOW (~500ms)
+console.time("slow");
+const list1 = document.getElementById("list1");
+for (let i = 0; i < 1000; i++) {
+    const li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+    list1.appendChild(li);  // 1000 reflows
+}
+console.timeEnd("slow");
+
+// ✅ FAST (~10ms)
+console.time("fast");
+const list2 = document.getElementById("list2");
+const frag = document.createDocumentFragment();
+for (let i = 0; i < 1000; i++) {
+    const li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+    frag.appendChild(li);  // Không reflow
+}
+list2.appendChild(frag);  // 1 reflow
+console.timeEnd("fast");
+
+// → Nhanh hơn 50x lần!
+```
+
+---
+
+#### **Khi nào dùng DocumentFragment:**
+- ✅ Thêm **nhiều elements** một lúc (> 10)
+- ✅ Cải thiện performance critical features
+- ✅ Loop thêm DOM nodes
+
+#### **Khi nào không cần:**
+- ❌ Thêm 1-2 elements
+- ❌ Performance không quan trọng
+
+---
+
+## Tóm tắt Phần C:
+
+| Câu | Điểm | Nội dung |
+|-----|------|---------|
+| **C1** | 8đ | 7 lỗi: sai event, gán DOM, missing history, innerHTML=null, remove;, type conversion |
+| **C2** | 7đ | Event Delegation (memory/performance) + DocumentFragment (1 reflow vs 1000) |
